@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import Providers from "@/provider/provider"
-import { Box } from "@chakra-ui/react"
+import { Container } from "@chakra-ui/react"
 
 export const metadata: Metadata = {
   title: "Peeper",
@@ -17,9 +17,9 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <Providers>
-          <Box h="full" fontFamily="nanum">
+          <Container as="main" h="full" maxW={"1500px"} fontFamily="nanum">
             {children}
-          </Box>
+          </Container>
         </Providers>
       </body>
     </html>
