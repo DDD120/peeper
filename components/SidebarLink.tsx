@@ -16,10 +16,10 @@ function SidebarLink({ text, Icon, active }: Props) {
       fontWeight={active ? 700 : 400}
       transition={"all 0.3s"}
       padding={2}
+      cursor="pointer"
+      borderRadius="4px"
       _hover={{
-        cursor: "pointer",
         backgroundColor: theme.colors.gray[200],
-        borderRadius: "4px",
       }}
       _active={{
         backgroundColor: theme.colors.gray[300],

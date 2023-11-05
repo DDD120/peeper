@@ -20,7 +20,6 @@ function Sidebar() {
       <Flex
         flexDir="column"
         alignItems={{ md: "cneter", lg: "flex-start" }}
-        w={{ lg: "340px" }}
         h="full"
         position="fixed"
         padding={4}
