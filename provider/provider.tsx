@@ -12,8 +12,6 @@ interface Props {
 }
 
 function Providers({ session, children }: Props) {
-  if (!session) return <div>로그인</div>
-
   return (
     <SessionProvider session={session}>
       <CacheProvider>

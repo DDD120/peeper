@@ -22,7 +22,8 @@ function Sidebar() {
         alignItems={{ md: "cneter", lg: "flex-start" }}
         h="full"
         position="fixed"
-        padding={4}
+        py={4}
+        pr={4}
       >
         <Box
           w="32px"

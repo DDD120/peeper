@@ -3,7 +3,6 @@ import "./globals.css"
 import Providers from "@/provider/provider"
 import { Container } from "@chakra-ui/react"
 import { getServerSession } from "next-auth/next"
-import { getProviders } from "next-auth/react"
 import { authOptions } from "./api/auth/[...nextauth]/route"
 
 export const metadata: Metadata = {
@@ -17,7 +16,6 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const session = await getServerSession(authOptions)
-
   return (
     <html lang="ko">
       <body>

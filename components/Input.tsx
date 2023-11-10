@@ -17,11 +17,13 @@ import EmojiPicker, {
   SuggestionMode,
 } from "emoji-picker-react"
 import { createPost } from "@/apis/posts"
+import { useSession } from "next-auth/react"
 
 function Input() {
   const [value, setValue] = useState("")
   const [isShowEmojis, setIsShowEmojis] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const { data: session } = useSession()
 
   const onButtonClick = async () => {
     if (isLoading) return
@@ -39,7 +41,13 @@ function Input() {
 
   return (
     <Flex gap={4} opacity={isLoading ? 0.6 : 1}>
-      <Avatar size="sm" cursor="pointer" m={2} />
+      <Avatar
+        name={session?.user.name!}
+        src={session?.user.image!}
+        size="sm"
+        cursor="pointer"
+        m={2}
+      />
       <Box w="full">
         <Textarea
           placeholder="What's a happening?"
