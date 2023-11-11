@@ -1,27 +1,30 @@
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
+import {
+  addDoc,
+  collection,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+  serverTimestamp,
+} from 'firebase/firestore'
 import { db } from './firebase'
+import { PostType } from '@/types/posts'
 
 interface CreatePostProps {
-  id: string | undefined
+  userId: string | undefined
   username: string | undefined | null
   userImg: string | undefined | null
   tag: string | undefined
   text: string
 }
 
-export async function createPost({
-  id,
-  username,
-  userImg,
-  tag,
-  text,
-}: CreatePostProps) {
+export async function createPost(props: CreatePostProps) {
   return await addDoc(collection(db, 'posts'), {
-    id,
-    username,
-    userImg,
-    tag,
-    text,
+    ...props,
     timestemp: serverTimestamp(),
   })
+}
+
+export function getPosts() {
+  return query(collection(db, 'posts'), orderBy('timestemp', 'desc'))
 }

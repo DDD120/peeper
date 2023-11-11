@@ -30,7 +30,7 @@ function Input() {
     setIsLoading(true)
 
     await createPost({
-      id: session?.user.uid,
+      userId: session?.user.uid,
       username: session?.user.name,
       userImg: session?.user.image,
       tag: session?.user.tag,
