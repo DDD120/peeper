@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import { useState } from "react"
+import { useState } from 'react'
 import {
   Avatar,
   Box,
@@ -9,18 +9,18 @@ import {
   IconButton,
   Textarea,
   theme,
-} from "@chakra-ui/react"
-import { PiSmileyDuotone } from "react-icons/pi"
+} from '@chakra-ui/react'
+import { PiSmileyDuotone } from 'react-icons/pi'
 import EmojiPicker, {
   EmojiClickData,
   EmojiStyle,
   SuggestionMode,
-} from "emoji-picker-react"
-import { createPost } from "@/apis/posts"
-import { useSession } from "next-auth/react"
+} from 'emoji-picker-react'
+import { createPost } from '@/apis/posts'
+import { useSession } from 'next-auth/react'
 
 function Input() {
-  const [value, setValue] = useState("")
+  const [value, setValue] = useState('')
   const [isShowEmojis, setIsShowEmojis] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const { data: session } = useSession()
@@ -29,10 +29,16 @@ function Input() {
     if (isLoading) return
     setIsLoading(true)
 
-    await createPost({ text: value })
+    await createPost({
+      id: session?.user.uid,
+      username: session?.user.name,
+      userImg: session?.user.image,
+      tag: session?.user.tag,
+      text: value,
+    })
     setIsLoading(false)
     setIsShowEmojis(false)
-    setValue("")
+    setValue('')
   }
 
   const onEmojiClick = (emojiData: EmojiClickData) => {
@@ -44,27 +50,27 @@ function Input() {
       <Avatar
         name={session?.user.name!}
         src={session?.user.image!}
-        size="sm"
-        cursor="pointer"
+        size='sm'
+        cursor='pointer'
         m={2}
       />
-      <Box w="full">
+      <Box w='full'>
         <Textarea
           placeholder="What's a happening?"
-          variant="unstyled"
+          variant='unstyled'
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <Flex justifyContent="space-between" mt={2}>
+        <Flex justifyContent='space-between' mt={2}>
           <IconButton
-            size="xs"
-            aria-label="select emoji"
-            icon={<PiSmileyDuotone size="100%" />}
-            variant="unstyled"
+            size='xs'
+            aria-label='select emoji'
+            icon={<PiSmileyDuotone size='100%' />}
+            variant='unstyled'
             onClick={() => setIsShowEmojis(!isShowEmojis)}
           />
           {isShowEmojis && (
-            <Box position="absolute" mt="32px" ml="-64px">
+            <Box position='absolute' mt='32px' ml='-64px'>
               <EmojiPicker
                 onEmojiClick={onEmojiClick}
                 skinTonesDisabled
