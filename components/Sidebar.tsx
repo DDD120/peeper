@@ -3,15 +3,15 @@
 import { Box, Button, Flex, List, Show, theme } from '@chakra-ui/react'
 import SidebarLink from './SidebarLink'
 import {
-  PiHouseDuotone,
-  PiHashDuotone,
-  PiBellDuotone,
-  PiEnvelopeSimpleDuotone,
-  PiBookmarkSimpleDuotone,
-  PiClipboardDuotone,
-  PiUserDuotone,
-  PiDotsThreeOutlineDuotone,
-  PiBirdDuotone,
+  PiHouseDuotone as HomeIcon,
+  PiHashDuotone as ExploreIcon,
+  PiBellDuotone as NotificationsIcon,
+  PiEnvelopeSimpleDuotone as MessagesIcon,
+  PiBookmarkSimpleDuotone as BookmarksIcon,
+  PiClipboardDuotone as ListsIcon,
+  PiUserDuotone as ProfileIcon,
+  PiDotsThreeOutlineDuotone as MoreIcon,
+  PiBirdDuotone as BirdIcon,
 } from 'react-icons/pi'
 
 function Sidebar() {
@@ -34,17 +34,17 @@ function Sidebar() {
             cursor: 'pointer',
           }}
         >
-          <PiBirdDuotone size={32} />
+          <BirdIcon size={32} />
         </Box>
         <List spacing={2} mt={8} mb={4}>
-          <SidebarLink text='Home' Icon={PiHouseDuotone} active />
-          <SidebarLink text='Explore' Icon={PiHashDuotone} />
-          <SidebarLink text='Notifications' Icon={PiBellDuotone} />
-          <SidebarLink text='Messages' Icon={PiEnvelopeSimpleDuotone} />
-          <SidebarLink text='Bookmarks' Icon={PiBookmarkSimpleDuotone} />
-          <SidebarLink text='Lists' Icon={PiClipboardDuotone} />
-          <SidebarLink text='Profile' Icon={PiUserDuotone} />
-          <SidebarLink text='More' Icon={PiDotsThreeOutlineDuotone} />
+          <SidebarLink text='Home' Icon={HomeIcon} active />
+          <SidebarLink text='Explore' Icon={ExploreIcon} />
+          <SidebarLink text='Notifications' Icon={NotificationsIcon} />
+          <SidebarLink text='Messages' Icon={MessagesIcon} />
+          <SidebarLink text='Bookmarks' Icon={BookmarksIcon} />
+          <SidebarLink text='Lists' Icon={ListsIcon} />
+          <SidebarLink text='Profile' Icon={ProfileIcon} />
+          <SidebarLink text='More' Icon={MoreIcon} />
         </List>
         <Show above='lg'>
           <Button
