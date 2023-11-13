@@ -1,5 +1,9 @@
 import { useState } from 'react'
-import { PiChatTeardropDuotone as ChatIcon } from 'react-icons/pi'
+import {
+  PiChatTeardropDuotone as ChatIcon,
+  PiDotsThreeOutlineDuotone as DotsIcon,
+  PiTrashDuotone as TrashIcon,
+} from 'react-icons/pi'
 import { useModalState, usePostIdState } from '@/atoms/modalAtom'
 import { PostType } from '@/types/posts'
 import {
@@ -11,22 +15,37 @@ import {
   HStack,
   Heading,
   IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Stack,
   Text,
   theme,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/navigation'
+import { deletePost } from '@/apis/posts'
+import { useSession } from 'next-auth/react'
 
 interface Props {
+  id: string
   post: PostType
 }
 
-function Post({ post }: Props) {
+function Post({ id, post }: Props) {
   const [isOpen, setIsOpen] = useModalState()
   const [postId, setPostId] = usePostIdState()
   const [comments, setComments] = useState([])
+  const { data: session } = useSession()
+  const router = useRouter()
 
   const handleChatClick = () => {
     setIsOpen(true)
+  }
+
+  const handleTrashClick = () => {
+    deletePost(id)
+    router.replace('/')
   }
 
   return (
@@ -58,6 +77,21 @@ function Post({ post }: Props) {
           </HStack>
         </Stack>
       </CardBody>
+      <Menu>
+        <MenuButton
+          as={IconButton}
+          aria-label='Options'
+          icon={<DotsIcon />}
+          variant='unstyled'
+        />
+        <MenuList>
+          {session?.user.uid === post.userId && (
+            <MenuItem icon={<TrashIcon size={24} />} onClick={handleTrashClick}>
+              핍 삭제하기
+            </MenuItem>
+          )}
+        </MenuList>
+      </Menu>
     </Card>
   )
 }

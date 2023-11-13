@@ -1,14 +1,13 @@
 import {
   addDoc,
   collection,
-  getDocs,
-  onSnapshot,
+  deleteDoc,
+  doc,
   orderBy,
   query,
   serverTimestamp,
 } from 'firebase/firestore'
 import { db } from './firebase'
-import { PostType } from '@/types/posts'
 
 interface CreatePostProps {
   userId: string | undefined
@@ -27,4 +26,8 @@ export async function createPost(props: CreatePostProps) {
 
 export function getPosts() {
   return query(collection(db, 'posts'), orderBy('timestemp', 'desc'))
+}
+
+export async function deletePost(id: string) {
+  await deleteDoc(doc(db, 'posts', id))
 }

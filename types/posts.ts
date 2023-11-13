@@ -2,7 +2,7 @@ import { FieldValue } from 'firebase/firestore'
 
 export interface PostType {
   id: string
-  userid: string
+  userId: string
   username: string
   userImg: string
   tag: string
