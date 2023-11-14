@@ -9,3 +9,8 @@ export interface PostType {
   text: string
   timestemp: FieldValue
 }
+
+export interface Likes {
+  id: string
+  userId: string
+}
