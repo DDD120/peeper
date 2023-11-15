@@ -15,7 +15,7 @@ export const authOptions: AuthOptions = {
   callbacks: {
     async session({ session, token }) {
       if (session?.user) {
-        session.user.tag = session.user?.name
+        session.user.tag = session.user.name
           ?.split(" ")
           .join("")
           .toLocaleLowerCase()

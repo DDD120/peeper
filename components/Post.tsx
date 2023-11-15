@@ -8,7 +8,7 @@ import {
   PiHeartDuotone as FillHeartIcon,
 } from 'react-icons/pi'
 import { useModalState, usePostIdState } from '@/atoms/modalAtom'
-import { Likes, PostType } from '@/types/posts'
+import { CommentType, LikesType, PostType } from '@/types/posts'
 import {
   Avatar,
   Box,
@@ -28,7 +28,13 @@ import {
   theme,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
-import { deletePost, getLikesByPost, likePost, unlikePost } from '@/apis/posts'
+import {
+  deletePost,
+  getComments,
+  getLikesByPost,
+  likePost,
+  unlikePost,
+} from '@/apis/posts'
 import { useSession } from 'next-auth/react'
 import { onSnapshot } from 'firebase/firestore'
 
@@ -40,9 +46,10 @@ interface Props {
 function Post({ id, post }: Props) {
   const [isOpen, setIsOpen] = useModalState()
   const [postId, setPostId] = usePostIdState()
-  const [comments, setComments] = useState([])
-  const [likes, setLikes] = useState<Likes[]>([])
+  const [comments, setComments] = useState<CommentType[]>([])
+  const [likes, setLikes] = useState<LikesType[]>([])
   const [isLiked, setIsLiked] = useState(false)
+  const [hasMyComment, setHasMyComment] = useState(false)
   const { data: session } = useSession()
   const router = useRouter()
 
@@ -70,8 +77,19 @@ function Post({ id, post }: Props) {
     deletePost(id)
     router.replace('/')
   }
-
   useEffect(() => {
+    onSnapshot(getComments(id), (snapshot) => {
+      const comments = snapshot.docs.map((doc) => {
+        const comment = doc.data()
+        if (comment.userId === session?.user.uid) setHasMyComment(true)
+
+        return {
+          id: doc.id,
+          ...comment,
+        } as CommentType
+      })
+      setComments(comments)
+    })
     onSnapshot(getLikesByPost(id), (snapshot) => {
       const likesbyPost = snapshot.docs.map((doc) => {
         const user = doc.data()
@@ -80,7 +98,7 @@ function Post({ id, post }: Props) {
         return {
           id: doc.id,
           ...doc.data(),
-        } as Likes
+        } as LikesType
       })
       setLikes(likesbyPost)
     })
@@ -113,7 +131,7 @@ function Post({ id, post }: Props) {
                 size='md'
                 onClick={handleChatClick}
                 icon={
-                  comments.length > 0 ? (
+                  hasMyComment ? (
                     <FillChatIcon size={20} />
                   ) : (
                     <LineChatIcon size={20} />

@@ -1,4 +1,4 @@
-import { getPost } from '@/apis/posts'
+import { createComment, getPost } from '@/apis/posts'
 import { useModalState, usePostIdValue } from '@/atoms/modalAtom'
 import { PostType } from '@/types/posts'
 import {
@@ -23,7 +23,11 @@ import { onSnapshot } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { PiSmileyDuotone } from 'react-icons/pi'
-import EmojiPicker, { EmojiClickData, EmojiStyle, SuggestionMode } from 'emoji-picker-react'
+import EmojiPicker, {
+  EmojiClickData,
+  EmojiStyle,
+  SuggestionMode,
+} from 'emoji-picker-react'
 
 function InputModal() {
   const [value, setValue] = useState('')
@@ -47,8 +51,27 @@ function InputModal() {
     setValue((prev) => prev + emojiData.emoji)
   }
 
+  const onButtonClick = async () => {
+    if (!session) return
+    await createComment({
+      postId,
+      comment: value,
+      userId: session.user.uid,
+      username: session.user.name,
+      tag: session.user.tag,
+      userImg: session.user.image,
+    })
+    setIsOpen(false)
+    setValue('')
+  }
+
   return (
-    <Modal isOpen={isOpen} onClose={() => {}}>
+    <Modal
+      isOpen={isOpen}
+      onClose={() => {
+        setValue('')
+      }}
+    >
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>답글</ModalHeader>
@@ -121,7 +144,7 @@ function InputModal() {
               </Box>
             )}
             <Button
-              // onClick={onButtonClick}
+              onClick={onButtonClick}
               isDisabled={!value.trim()}
               backgroundColor={theme.colors.blackAlpha[200]}
             >

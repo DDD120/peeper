@@ -10,7 +10,16 @@ export interface PostType {
   timestemp: FieldValue
 }
 
-export interface Likes {
+export interface LikesType {
   id: string
   userId: string
+}
+
+export interface CommentType {
+  id: string
+  comment: string
+  userId: string
+  username: string
+  userImg: string
+  tag: string
 }

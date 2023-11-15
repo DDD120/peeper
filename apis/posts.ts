@@ -23,15 +23,24 @@ interface likePostProps {
   userId: string | undefined
 }
 
+interface CreateCommentProps {
+  postId: string
+  comment: string
+  userId: string | undefined
+  username: string | null | undefined
+  tag: string | null | undefined
+  userImg: string | null | undefined
+}
+
 export async function createPost(props: CreatePostProps) {
   return await addDoc(collection(db, 'posts'), {
     ...props,
-    timestemp: serverTimestamp(),
+    timestamp: serverTimestamp(),
   })
 }
 
 export function getPosts() {
-  return query(collection(db, 'posts'), orderBy('timestemp', 'desc'))
+  return query(collection(db, 'posts'), orderBy('timestamp', 'desc'))
 }
 
 export function getPost(postId: string) {
@@ -39,21 +48,40 @@ export function getPost(postId: string) {
 }
 
 export async function deletePost(postId: string) {
-  await deleteDoc(doc(db, 'posts', postId))
+  return await deleteDoc(doc(db, 'posts', postId))
 }
 
 export async function unlikePost({ postId, userId }: likePostProps) {
   if (!userId) return
-  await deleteDoc(doc(db, 'posts', postId, 'likes', userId))
+  return await deleteDoc(doc(db, 'posts', postId, 'likes', userId))
 }
 
 export async function likePost({ postId, userId }: likePostProps) {
   if (!userId) return
-  await setDoc(doc(db, 'posts', postId, 'likes', userId), {
+  return await setDoc(doc(db, 'posts', postId, 'likes', userId), {
     userId,
   })
 }
 
 export function getLikesByPost(postId: string) {
   return query(collection(db, 'posts', postId, 'likes'))
+}
+
+export async function createComment({
+  postId,
+  comment,
+  ...userInfo
+}: CreateCommentProps) {
+  return await addDoc(collection(db, 'posts', postId, 'comments'), {
+    comment,
+    ...userInfo,
+    timestamp: serverTimestamp(),
+  })
+}
+
+export function getComments(postId: string) {
+  return query(
+    collection(db, 'posts', postId, 'comments'),
+    orderBy('timestamp', 'desc')
+  )
 }
