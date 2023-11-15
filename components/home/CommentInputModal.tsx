@@ -29,7 +29,7 @@ import EmojiPicker, {
   SuggestionMode,
 } from 'emoji-picker-react'
 
-function InputModal() {
+function CommentInputModal() {
   const [value, setValue] = useState('')
   const { data: session } = useSession()
   const [isOpen, setIsOpen] = useModalState()
@@ -157,4 +157,4 @@ function InputModal() {
   )
 }
 
-export default InputModal
+export default CommentInputModal

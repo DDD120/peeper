@@ -1,8 +1,8 @@
 'use client'
 
-import Feed from '@/components/Feed'
-import InputModal from '@/components/InputModal'
-import Sidebar from '@/components/Sidebar'
+import Sidebar from '@/components/common/sidebar/Sidebar'
+import CommentInputModal from '@/components/home/CommentInputModal'
+import Feed from '@/components/home/Feed'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
@@ -19,7 +19,7 @@ export default function Home() {
     <>
       <Sidebar />
       <Feed />
-      <InputModal />
+      <CommentInputModal />
     </>
   )
 }

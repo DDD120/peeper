@@ -5,9 +5,9 @@ import { Box, Flex, Stack, Heading, Icon, Divider } from '@chakra-ui/react'
 import { PiShootingStarDuotone } from 'react-icons/pi'
 import { getPosts } from '@/apis/posts'
 import { PostType } from '@/types/posts'
-import Post from './Post'
 import { onSnapshot } from 'firebase/firestore'
 import PostInput from './PostInput'
+import Post from './Post'
 
 function Feed() {
   const [posts, setPosts] = useState<PostType[]>([])
