@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import {
-  PiChatTeardropDuotone as ChatIcon,
+  PiChatTeardrop as LineChatIcon,
+  PiChatTeardropDuotone as FillChatIcon,
   PiDotsThreeOutlineDuotone as DotsIcon,
   PiTrashDuotone as TrashIcon,
   PiHeart as LineHeartIcon,
@@ -47,6 +48,7 @@ function Post({ id, post }: Props) {
 
   const handleChatClick = () => {
     setIsOpen(true)
+    setPostId(id)
   }
 
   const handleHeartClick = async () => {
@@ -110,7 +112,13 @@ function Post({ id, post }: Props) {
                 variant='ghost'
                 size='md'
                 onClick={handleChatClick}
-                icon={<ChatIcon size={20} />}
+                icon={
+                  comments.length > 0 ? (
+                    <FillChatIcon size={20} />
+                  ) : (
+                    <LineChatIcon size={20} />
+                  )
+                }
               />
               {comments.length > 0 && <Text as='span'>{comments.length}</Text>}
             </Box>

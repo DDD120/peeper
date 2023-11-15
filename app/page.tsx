@@ -1,6 +1,7 @@
 'use client'
 
 import Feed from '@/components/Feed'
+import InputModal from '@/components/InputModal'
 import Sidebar from '@/components/Sidebar'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -18,6 +19,7 @@ export default function Home() {
     <>
       <Sidebar />
       <Feed />
+      <InputModal />
     </>
   )
 }

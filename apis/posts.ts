@@ -18,7 +18,7 @@ interface CreatePostProps {
   text: string
 }
 
-interface UnlikePostProps {
+interface likePostProps {
   postId: string
   userId: string | undefined
 }
@@ -34,15 +34,21 @@ export function getPosts() {
   return query(collection(db, 'posts'), orderBy('timestemp', 'desc'))
 }
 
+export function getPost(postId: string) {
+  return doc(db, 'posts', postId)
+}
+
 export async function deletePost(postId: string) {
   await deleteDoc(doc(db, 'posts', postId))
 }
 
-export async function unlikePost({ postId, userId }: UnlikePostProps) {
+export async function unlikePost({ postId, userId }: likePostProps) {
+  if (!userId) return
   await deleteDoc(doc(db, 'posts', postId, 'likes', userId))
 }
 
-export async function likePost({ postId, userId }) {
+export async function likePost({ postId, userId }: likePostProps) {
+  if (!userId) return
   await setDoc(doc(db, 'posts', postId, 'likes', userId), {
     userId,
   })

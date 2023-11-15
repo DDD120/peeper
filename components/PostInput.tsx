@@ -19,7 +19,7 @@ import EmojiPicker, {
 import { createPost } from '@/apis/posts'
 import { useSession } from 'next-auth/react'
 
-function Input() {
+function PostInput() {
   const [value, setValue] = useState('')
   const [isShowEmojis, setIsShowEmojis] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -70,7 +70,7 @@ function Input() {
             onClick={() => setIsShowEmojis(!isShowEmojis)}
           />
           {isShowEmojis && (
-            <Box position='absolute' mt='32px' ml='-64px'>
+            <Box position='absolute' mt='32px' ml='-64px' zIndex={9}>
               <EmojiPicker
                 onEmojiClick={onEmojiClick}
                 skinTonesDisabled
@@ -92,4 +92,4 @@ function Input() {
   )
 }
 
-export default Input
+export default PostInput

@@ -1,4 +1,4 @@
-import { atom, useRecoilState } from 'recoil'
+import { atom, useRecoilState, useRecoilValue } from 'recoil'
 
 export const modalState = atom({
   key: 'modalState',
@@ -13,3 +13,4 @@ export const postIdState = atom({
 })
 
 export const usePostIdState = () => useRecoilState(postIdState)
+export const usePostIdValue = () => useRecoilValue(postIdState)

@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react'
 import { Box, Flex, Stack, Heading, Icon, Divider } from '@chakra-ui/react'
 import { PiShootingStarDuotone } from 'react-icons/pi'
-import Input from './Input'
 import { getPosts } from '@/apis/posts'
 import { PostType } from '@/types/posts'
 import Post from './Post'
 import { onSnapshot } from 'firebase/firestore'
+import PostInput from './PostInput'
 
 function Feed() {
   const [posts, setPosts] = useState<PostType[]>([])
@@ -45,7 +45,7 @@ function Feed() {
           <Icon w={6} h={6} as={PiShootingStarDuotone} />
         </Flex>
       </Flex>
-      <Input />
+      <PostInput />
       <Divider my={4} />
       <Stack divider={<Divider />} my={4}>
         {posts.map((post) => (
