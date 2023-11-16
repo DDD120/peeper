@@ -16,8 +16,8 @@ import EmojiPicker, {
   EmojiStyle,
   SuggestionMode,
 } from 'emoji-picker-react'
-import { createPost } from '@/apis/posts'
 import { useSession } from 'next-auth/react'
+import { createPost } from '@/apis/post'
 
 function PostInput() {
   const [value, setValue] = useState('')
@@ -26,14 +26,14 @@ function PostInput() {
   const { data: session } = useSession()
 
   const onButtonClick = async () => {
-    if (isLoading) return
+    if (!session || isLoading) return
     setIsLoading(true)
 
     await createPost({
-      userId: session?.user.uid,
-      username: session?.user.name,
-      userImg: session?.user.image,
-      tag: session?.user.tag,
+      userId: session.user.uid,
+      username: session.user.name,
+      userImg: session.user.image,
+      tag: session.user.tag,
       text: value,
     })
     setIsLoading(false)

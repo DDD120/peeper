@@ -10,7 +10,7 @@ export interface PostType {
   timestemp: FieldValue
 }
 
-export interface LikesType {
+export interface LikeType {
   id: string
   userId: string
 }

@@ -7,16 +7,14 @@ import {
   PiHeart as LineHeartIcon,
   PiHeartDuotone as FillHeartIcon,
 } from 'react-icons/pi'
-import { useModalState, usePostIdState } from '@/atoms/modalAtom'
-import { CommentType, LikesType, PostType } from '@/types/posts'
+import { useSetModalState, useSetPostIdState } from '@/atoms/modalAtom'
+import { CommentType, LikeType, PostType } from '@/types/type'
 import {
   Avatar,
   Box,
   Card,
   CardBody,
-  Center,
   Flex,
-  HStack,
   Heading,
   IconButton,
   Menu,
@@ -28,15 +26,11 @@ import {
   theme,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
-import {
-  deletePost,
-  getComments,
-  getLikesByPost,
-  likePost,
-  unlikePost,
-} from '@/apis/posts'
+import { deletePost } from '@/apis/post'
 import { useSession } from 'next-auth/react'
 import { onSnapshot } from 'firebase/firestore'
+import { getLikesByPostQuery, likePost, unlikePost } from '@/apis/like'
+import { getCommentsQuery } from '@/apis/comment'
 
 interface Props {
   id: string
@@ -44,10 +38,10 @@ interface Props {
 }
 
 function Post({ id, post }: Props) {
-  const [isOpen, setIsOpen] = useModalState()
-  const [postId, setPostId] = usePostIdState()
+  const setIsOpen = useSetModalState()
+  const setPostId = useSetPostIdState()
   const [comments, setComments] = useState<CommentType[]>([])
-  const [likes, setLikes] = useState<LikesType[]>([])
+  const [likes, setLikes] = useState<LikeType[]>([])
   const [isLiked, setIsLiked] = useState(false)
   const [hasMyComment, setHasMyComment] = useState(false)
   const { data: session } = useSession()
@@ -59,16 +53,17 @@ function Post({ id, post }: Props) {
   }
 
   const handleHeartClick = async () => {
+    if (!session || !session.user.uid) return
     setIsLiked(!isLiked)
     if (isLiked) {
       await unlikePost({
         postId: id,
-        userId: session?.user.uid,
+        userId: session.user.uid,
       })
     } else {
       await likePost({
         postId: id,
-        userId: session?.user.uid,
+        userId: session.user.uid,
       })
     }
   }
@@ -77,30 +72,31 @@ function Post({ id, post }: Props) {
     deletePost(id)
     router.replace('/')
   }
+
   useEffect(() => {
-    onSnapshot(getComments(id), (snapshot) => {
+    onSnapshot(getCommentsQuery(id), (snapshot) => {
       const comments = snapshot.docs.map((doc) => {
-        const comment = doc.data()
-        if (comment.userId === session?.user.uid) setHasMyComment(true)
+        const data = doc.data()
+        if (data.userId === session?.user.uid) setHasMyComment(true)
 
         return {
           id: doc.id,
-          ...comment,
+          ...data,
         } as CommentType
       })
       setComments(comments)
     })
-    onSnapshot(getLikesByPost(id), (snapshot) => {
-      const likesbyPost = snapshot.docs.map((doc) => {
-        const user = doc.data()
-        if (user.userId === session?.user.uid) setIsLiked(true)
+    onSnapshot(getLikesByPostQuery(id), (snapshot) => {
+      const likes = snapshot.docs.map((doc) => {
+        const data = doc.data()
+        if (data.userId === session?.user.uid) setIsLiked(true)
 
         return {
           id: doc.id,
-          ...doc.data(),
-        } as LikesType
+          ...data,
+        } as LikeType
       })
-      setLikes(likesbyPost)
+      setLikes(likes)
     })
   }, [id, session])
 

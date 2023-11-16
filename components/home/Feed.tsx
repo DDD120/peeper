@@ -3,29 +3,27 @@
 import { useEffect, useState } from 'react'
 import { Box, Flex, Stack, Heading, Icon, Divider } from '@chakra-ui/react'
 import { PiShootingStarDuotone } from 'react-icons/pi'
-import { getPosts } from '@/apis/posts'
 import { PostType } from '@/types/posts'
 import { onSnapshot } from 'firebase/firestore'
 import PostInput from './PostInput'
 import Post from './Post'
+import { getPostsQuery } from '@/apis/post'
 
 function Feed() {
   const [posts, setPosts] = useState<PostType[]>([])
 
   useEffect(() => {
-    onSnapshot(getPosts(), (snapshot) => {
-      const peepPosts = snapshot.docs.map(
+    onSnapshot(getPostsQuery(), (snapshot) => {
+      const posts = snapshot.docs.map(
         (doc) =>
           ({
             id: doc.id,
             ...doc.data(),
           } as PostType)
       )
-      setPosts(peepPosts)
+      setPosts(posts)
     })
   }, [])
-
-  console.log(posts)
 
   return (
     <Box flexGrow={1} ml={{ sm: '80px', lg: '260px' }} h={'full'}>

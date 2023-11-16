@@ -1,6 +1,7 @@
-import { createComment, getPost } from '@/apis/posts'
-import { useModalState, usePostIdValue } from '@/atoms/modalAtom'
-import { PostType } from '@/types/posts'
+import { getPost } from '@/apis/post'
+import { createComment } from '@/apis/comment'
+import { useModalState, usePostIdState } from '@/atoms/modalAtom'
+import { PostType } from '@/types/type'
 import {
   Avatar,
   Box,
@@ -34,18 +35,15 @@ function CommentInputModal() {
   const { data: session } = useSession()
   const [isOpen, setIsOpen] = useModalState()
   const [isShowEmojis, setIsShowEmojis] = useState(false)
-  const postId = usePostIdValue()
-  const [post, setPost] = useState<PostType>()
+  const [postId, setPostId] = usePostIdState()
+  const [post, setPost] = useState<PostType | null>(null)
 
-  useEffect(() => {
-    if (!postId) return
-    onSnapshot(getPost(postId), (snapshot) => {
-      setPost({
-        id: postId,
-        ...snapshot.data(),
-      } as PostType)
-    })
-  }, [postId])
+  const onModalCloes = () => {
+    setValue('')
+    setPost(null)
+    setPostId('')
+    setIsOpen(false)
+  }
 
   const onEmojiClick = (emojiData: EmojiClickData) => {
     setValue((prev) => prev + emojiData.emoji)
@@ -65,13 +63,18 @@ function CommentInputModal() {
     setValue('')
   }
 
+  useEffect(() => {
+    if (!postId) return
+    onSnapshot(getPost(postId), (snapshot) => {
+      setPost({
+        id: postId,
+        ...snapshot.data(),
+      } as PostType)
+    })
+  }, [postId])
+
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={() => {
-        setValue('')
-      }}
-    >
+    <Modal isOpen={isOpen} onClose={onModalCloes}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>답글</ModalHeader>

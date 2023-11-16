@@ -1,5 +1,5 @@
-import NextAuth, { AuthOptions } from "next-auth"
-import GooleProvider from "next-auth/providers/google"
+import NextAuth, { AuthOptions } from 'next-auth'
+import GooleProvider from 'next-auth/providers/google'
 
 export const authOptions: AuthOptions = {
   secret: process.env.AUTH_SECRET,
@@ -16,8 +16,8 @@ export const authOptions: AuthOptions = {
     async session({ session, token }) {
       if (session?.user) {
         session.user.tag = session.user.name
-          ?.split(" ")
-          .join("")
+          ?.split(' ')
+          .join('')
           .toLocaleLowerCase()
         session.user.uid = token.sub
       }
