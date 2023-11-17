@@ -23,3 +23,12 @@ export interface CommentType {
   userImg: string
   tag: string
 }
+
+export interface UserType {
+  userId: string
+  username: string
+  userImg: string | null | undefined
+  tag: string
+  provider: string | undefined
+  email: string | null | undefined
+}
