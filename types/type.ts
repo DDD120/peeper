@@ -1,4 +1,4 @@
-import { FieldValue } from 'firebase/firestore'
+import { Timestamp } from 'firebase/firestore'
 
 export interface PostType {
   id: string
@@ -7,7 +7,7 @@ export interface PostType {
   userImg: string
   tag: string
   text: string
-  timestemp: FieldValue
+  timestamp: Timestamp
 }
 
 export interface LikeType {

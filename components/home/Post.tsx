@@ -31,6 +31,7 @@ import { useSession } from 'next-auth/react'
 import { onSnapshot } from 'firebase/firestore'
 import { getLikesByPostQuery, likePost, unlikePost } from '@/apis/like'
 import { getCommentsQuery } from '@/apis/comment'
+import { formatDate } from '@/utils/date'
 
 interface Props {
   id: string
@@ -116,6 +117,15 @@ function Post({ id, post }: Props) {
               color={theme.colors.blackAlpha[700]}
             >
               @{post.tag}
+            </Text>
+
+            <Text
+              fontSize='xs'
+              as='span'
+              lineHeight={1.5}
+              color={theme.colors.blackAlpha[700]}
+            >
+              · {post.timestamp && formatDate(post.timestamp.toDate())}
             </Text>
           </Flex>
           <Text>{post.text}</Text>
