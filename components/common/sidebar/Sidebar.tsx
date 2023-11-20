@@ -29,7 +29,7 @@ import {
   PiBirdDuotone as BirdIcon,
   PiDotsThreeOutlineVerticalDuotone as DotsIcon,
 } from 'react-icons/pi'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 
 function Sidebar() {
   const { data: session } = useSession()
@@ -102,7 +102,7 @@ function Sidebar() {
             </MenuButton>
             <Portal>
               <MenuList>
-                <MenuItem>로그아웃</MenuItem>
+                <MenuItem onClick={() => signOut()}>로그아웃</MenuItem>
               </MenuList>
             </Portal>
           </Menu>
