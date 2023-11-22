@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { Box, Flex, Stack, Heading, Icon, Divider } from '@chakra-ui/react'
 import { PiShootingStarDuotone } from 'react-icons/pi'
-import { PostType } from '@/types/posts'
+import { PostType } from '@/types/type'
 import { onSnapshot } from 'firebase/firestore'
 import PostInput from './PostInput'
 import Post from './Post'
@@ -26,7 +26,7 @@ function Feed() {
   }, [])
 
   return (
-    <Box flexGrow={1} ml={{ sm: '80px', lg: '260px' }} h={'full'}>
+    <>
       <Flex
         justifyContent='space-between'
         px={{ sm: '4px' }}
@@ -50,7 +50,7 @@ function Feed() {
           <Post key={post.id} id={post.id} post={post} />
         ))}
       </Stack>
-    </Box>
+    </>
   )
 }
 

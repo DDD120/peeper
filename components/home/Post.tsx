@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { MouseEvent, useEffect, useState } from 'react'
 import {
   PiChatTeardrop as LineChatIcon,
   PiChatTeardropDuotone as FillChatIcon,
@@ -48,12 +48,14 @@ function Post({ id, post }: Props) {
   const { data: session } = useSession()
   const router = useRouter()
 
-  const handleChatClick = () => {
+  const handleChatClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
     setIsOpen(true)
     setPostId(id)
   }
 
-  const handleHeartClick = async () => {
+  const handleHeartClick = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
     if (!session || !session.user.uid) return
     setIsLiked(!isLiked)
     if (isLiked) {
@@ -69,7 +71,8 @@ function Post({ id, post }: Props) {
     }
   }
 
-  const handleTrashClick = () => {
+  const handleTrashClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
     deletePost(id)
     router.replace('/')
   }
@@ -102,7 +105,14 @@ function Post({ id, post }: Props) {
   }, [id, session])
 
   return (
-    <Card direction='row' variant='outline' w='full' border='none'>
+    <Card
+      direction='row'
+      variant='outline'
+      w='full'
+      border='none'
+      cursor='pointer'
+      onClick={() => router.push(`/${session?.user.tag}/post/${id}`)}
+    >
       <CardBody display='flex' gap={4}>
         <Avatar name={post.username} src={post.userImg} size='sm' />
         <Stack>
@@ -171,6 +181,7 @@ function Post({ id, post }: Props) {
           aria-label='Options'
           icon={<DotsIcon />}
           variant='unstyled'
+          onClick={(e) => e.stopPropagation()}
         />
         <MenuList>
           {session?.user.uid === post.userId && (
