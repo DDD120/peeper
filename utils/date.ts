@@ -6,12 +6,12 @@ export const formatDate = (date: Date) => {
   if (diff < 60) {
     return '방금 전'
   }
-  if (diff < 60 * 60 * 24 * 3) {
+  if (diff < 60 * 60 * 24 * 7) {
     return formatDistanceToNow(date, {
       addSuffix: true,
       locale: ko,
     })
-  } else {
-    return format(date, 'PPP EEE p', { locale: ko })
   }
+
+  return format(date, 'yy년 MM월 dd일', { locale: ko })
 }
