@@ -5,15 +5,15 @@ interface Props {
   children: React.ReactNode
 }
 
-function BasicLaout({ children }: Props) {
+function BasicLayout({ children }: Props) {
   return (
     <>
       <Sidebar />
-      <Box as='main' flexGrow={1} ml={{ sm: '80px', lg: '260px' }} h='full'>
+      <Box as='main' ml={{ sm: '80px', lg: '260px' }} h='full'>
         {children}
       </Box>
     </>
   )
 }
 
-export default BasicLaout
+export default BasicLayout

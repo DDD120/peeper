@@ -4,6 +4,7 @@ import Providers from '@/provider/provider'
 import { Container } from '@chakra-ui/react'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from './api/auth/[...nextauth]/route'
+import BasicLayout from '@/components/layout/BasicLayout'
 
 export const metadata: Metadata = {
   title: 'Peeper',
@@ -20,8 +21,14 @@ export default async function RootLayout({
     <html lang='ko'>
       <body>
         <Providers session={session}>
-          <Container as='main' h='full' maxW={'1300px'} fontFamily='nanum'>
-            {children}
+          <Container
+            h='full'
+            w='100%'
+            maxW='1300px'
+            fontFamily='nanum'
+            backgroundColor='white'
+          >
+            <BasicLayout>{children}</BasicLayout>
           </Container>
         </Providers>
       </body>
