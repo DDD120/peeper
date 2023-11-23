@@ -28,7 +28,9 @@ function SidebarLink({ text, Icon, active }: Props) {
           backgroundColor: theme.colors.gray[200],
         }}
       >
-        <ListIcon as={Icon} w={8} h={8} mr={0} />
+        <ListIcon w={8} h={8} mr={0}>
+          <Icon size='100%' />
+        </ListIcon>
         <Show above='lg'>{text}</Show>
       </Flex>
     </ListItem>

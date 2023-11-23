@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Box, Flex, Stack, Heading, Icon, Divider } from '@chakra-ui/react'
+import { Flex, Stack, Heading, Icon, Divider } from '@chakra-ui/react'
 import { PiShootingStarDuotone } from 'react-icons/pi'
 import { PostType } from '@/types/type'
 import { onSnapshot } from 'firebase/firestore'
@@ -29,7 +29,6 @@ function Feed() {
     <>
       <Flex
         justifyContent='space-between'
-        px={{ sm: '4px' }}
         py={4}
         position='sticky'
         top={0}
