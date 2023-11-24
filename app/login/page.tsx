@@ -1,14 +1,14 @@
-import { Flex, List, ListItem, Box, Heading } from "@chakra-ui/react"
-import { PiBirdDuotone } from "react-icons/pi"
-import WithGoogle from "@/components/login/withGoogle"
+import { Flex, List, ListItem, Box, Heading } from '@chakra-ui/react'
+import { PiBirdDuotone } from 'react-icons/pi'
+import WithGoogle from '@/components/login/withGoogle'
 
-function Login() {
+function LoginPage() {
   return (
     <Flex
-      direction="column"
-      justifyContent="center"
-      alignItems="center"
-      h="full"
+      direction='column'
+      justifyContent='center'
+      alignItems='center'
+      h='full'
       gap={4}
     >
       <Box>
@@ -24,4 +24,4 @@ function Login() {
   )
 }
 
-export default Login
+export default LoginPage
