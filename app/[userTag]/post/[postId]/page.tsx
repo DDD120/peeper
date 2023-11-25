@@ -1,9 +1,14 @@
 import { getPost } from '@/apis/post'
+import PostHeader from '@/components/post/PostHeader'
 import { PostType } from '@/types/type'
 import { Metadata } from 'next'
 
 function PostPage({}) {
-  return <>post page</>
+  return (
+    <>
+      <PostHeader />
+    </>
+  )
 }
 
 export default PostPage
