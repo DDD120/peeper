@@ -1,4 +1,4 @@
-import { Flex, ListIcon, ListItem, Show, theme } from '@chakra-ui/react'
+import { Flex, ListIcon, ListItem, Show } from '@chakra-ui/react'
 import { IconType } from 'react-icons/lib/esm/iconBase'
 
 interface Props {
@@ -22,10 +22,10 @@ function SidebarLink({ text, Icon, active }: Props) {
         cursor='pointer'
         borderRadius='full'
         _hover={{
-          backgroundColor: theme.colors.gray[100],
+          backgroundColor: 'gray.100',
         }}
         _active={{
-          backgroundColor: theme.colors.gray[200],
+          backgroundColor: 'gray.200',
         }}
       >
         <ListIcon w={8} h={8} mr={0}>

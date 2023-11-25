@@ -8,7 +8,6 @@ import {
   Flex,
   IconButton,
   Textarea,
-  theme,
 } from '@chakra-ui/react'
 import { PiSmileyDuotone } from 'react-icons/pi'
 import EmojiPicker, {
@@ -56,7 +55,7 @@ function PostInput() {
       />
       <Box w='full'>
         <Textarea
-          placeholder="What's a happening?"
+          placeholder='무슨 일이 일어나고 있나요?'
           variant='unstyled'
           value={value}
           onChange={(e) => setValue(e.target.value)}
@@ -82,7 +81,7 @@ function PostInput() {
           <Button
             onClick={onButtonClick}
             isDisabled={!value.trim() || isLoading}
-            backgroundColor={theme.colors.blackAlpha[200]}
+            backgroundColor='blackAlpha.200'
           >
             Peep
           </Button>

@@ -1,4 +1,4 @@
-import { Box, Button, Flex, List, Show, theme } from '@chakra-ui/react'
+import { Box, Button, Flex, List, Show } from '@chakra-ui/react'
 import SidebarLink from './SidebarLink'
 import {
   PiHouseDuotone as HomeIcon,
@@ -45,7 +45,7 @@ function Sidebar() {
               h='52px'
               flexShrink={0}
               rounded='full'
-              backgroundColor={theme.colors.blackAlpha[200]}
+              backgroundColor='blackAlpha.200'
               fontSize='lg'
             >
               Peep

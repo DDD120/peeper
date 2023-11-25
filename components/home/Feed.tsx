@@ -36,7 +36,7 @@ function Feed() {
         backgroundColor='#fff'
       >
         <Heading as='h2' size={{ sm: 'sm', lg: 'md' }}>
-          Home
+          홈
         </Heading>
         <Flex>
           <Icon w={6} h={6} as={PiShootingStarDuotone} />

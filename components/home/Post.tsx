@@ -23,7 +23,6 @@ import {
   MenuList,
   Stack,
   Text,
-  theme,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 import { deletePost } from '@/apis/post'
@@ -112,6 +111,9 @@ function Post({ id, post }: Props) {
       border='none'
       cursor='pointer'
       onClick={() => router.push(`/${session?.user.tag}/post/${id}`)}
+      _hover={{
+        backgroundColor: 'gray.50',
+      }}
     >
       <CardBody display='flex' gap={4}>
         <Avatar name={post.username} src={post.userImg} size='sm' />
@@ -124,16 +126,15 @@ function Post({ id, post }: Props) {
               fontSize='xs'
               as='span'
               lineHeight={1.5}
-              color={theme.colors.blackAlpha[700]}
+              color='blackAlpha.700'
             >
               @{post.tag}
             </Text>
-
             <Text
               fontSize='xs'
               as='span'
               lineHeight={1.5}
-              color={theme.colors.blackAlpha[700]}
+              color='blackAlpha.700'
             >
               · {post.timestamp && formatDate(post.timestamp.toDate())}
             </Text>

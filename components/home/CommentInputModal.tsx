@@ -1,4 +1,4 @@
-import { getPost } from '@/apis/post'
+import { getPostRef } from '@/apis/post'
 import { createComment } from '@/apis/comment'
 import { useModalState, usePostIdState } from '@/atoms/modalAtom'
 import { PostType } from '@/types/type'
@@ -18,7 +18,6 @@ import {
   ModalOverlay,
   Text,
   Textarea,
-  theme,
 } from '@chakra-ui/react'
 import { onSnapshot } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
@@ -65,7 +64,7 @@ function CommentInputModal() {
 
   useEffect(() => {
     if (!postId) return
-    onSnapshot(getPost(postId), (snapshot) => {
+    onSnapshot(getPostRef(postId), (snapshot) => {
       setPost({
         id: postId,
         ...snapshot.data(),
@@ -88,7 +87,7 @@ function CommentInputModal() {
               top={0}
               left={4}
               position='absolute'
-              backgroundColor={theme.colors.blackAlpha[200]}
+              backgroundColor='blackAlpha.200'
               zIndex={-1}
             />
             <Box>
@@ -100,7 +99,7 @@ function CommentInputModal() {
                   fontSize='xs'
                   as='span'
                   lineHeight={1.5}
-                  color={theme.colors.blackAlpha[700]}
+                  color='blackAlpha.700'
                 >
                   @{post?.tag}
                 </Text>
@@ -115,7 +114,7 @@ function CommentInputModal() {
               size='sm'
             />
             <Textarea
-              placeholder="What's a happening?"
+              placeholder='답글 달기'
               variant='unstyled'
               value={value}
               onChange={(e) => setValue(e.target.value)}
@@ -149,7 +148,7 @@ function CommentInputModal() {
             <Button
               onClick={onButtonClick}
               isDisabled={!value.trim()}
-              backgroundColor={theme.colors.blackAlpha[200]}
+              backgroundColor='blackAlpha.200'
             >
               Peep
             </Button>
