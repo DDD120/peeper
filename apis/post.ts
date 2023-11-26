@@ -3,6 +3,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   orderBy,
   query,
   serverTimestamp,
@@ -28,8 +29,12 @@ export function getPostsQuery() {
   return query(collection(db, 'posts'), orderBy('timestamp', 'desc'))
 }
 
-export function getPost(postId: string) {
+export function getPostRef(postId: string) {
   return doc(db, 'posts', postId)
+}
+
+export async function getPost(postId: string) {
+  return await getDoc(getPostRef(postId))
 }
 
 export async function deletePost(postId: string) {
