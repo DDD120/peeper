@@ -136,7 +136,12 @@ function Post({ id, post }: Props) {
               lineHeight={1.5}
               color='blackAlpha.700'
             >
-              · {post.timestamp && formatDate(post.timestamp.toDate())}
+              ·{' '}
+              {post.timestamp &&
+                formatDate({
+                  date: post.timestamp.toDate(),
+                  type: 'distanceToNow',
+                })}
             </Text>
           </Flex>
           <Text>{post.text}</Text>
