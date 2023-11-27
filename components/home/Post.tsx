@@ -1,4 +1,3 @@
-import { MouseEvent } from 'react'
 import {
   PiDotsThreeOutlineDuotone as DotsIcon,
   PiTrashDuotone as TrashIcon,
@@ -19,25 +18,19 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
-import { deletePost } from '@/apis/post'
 import { useSession } from 'next-auth/react'
 import { formatDate } from '@/utils/date'
 import PostActionBar from '../common/post/PostActionBar'
+import usePostAction from '@/hooks/usePostAction'
 
 interface Props {
-  id: string
   post: PostType
 }
 
-function Post({ id, post }: Props) {
+function Post({ post }: Props) {
   const { data: session } = useSession()
   const router = useRouter()
-
-  const handleTrashClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation()
-    deletePost(id)
-    router.replace('/')
-  }
+  const { handleTrashClick } = usePostAction(post.id)
 
   return (
     <Card
@@ -46,7 +39,7 @@ function Post({ id, post }: Props) {
       w='full'
       border='none'
       cursor='pointer'
-      onClick={() => router.push(`/${session?.user.tag}/post/${id}`)}
+      onClick={() => router.push(`/${session?.user.tag}/post/${post.id}`)}
       _hover={{
         backgroundColor: 'gray.50',
       }}
@@ -81,7 +74,7 @@ function Post({ id, post }: Props) {
             </Text>
           </Flex>
           <Text>{post.text}</Text>
-          <PostActionBar postId={id} />
+          <PostActionBar postId={post.id} />
         </Stack>
       </CardBody>
       <Menu>

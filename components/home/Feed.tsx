@@ -46,7 +46,7 @@ function Feed() {
       <Divider my={4} />
       <Stack divider={<Divider />} my={4}>
         {posts.map((post) => (
-          <Post key={post.id} id={post.id} post={post} />
+          <Post key={post.id} post={post} />
         ))}
       </Stack>
     </>

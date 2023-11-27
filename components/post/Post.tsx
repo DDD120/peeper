@@ -1,7 +1,5 @@
 'use client'
 
-import { deletePost, getPostRef } from '@/apis/post'
-import { PostType } from '@/types/type'
 import { formatDate } from '@/utils/date'
 import {
   Avatar,
@@ -20,36 +18,21 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { onSnapshot } from 'firebase/firestore'
 import { useSession } from 'next-auth/react'
-import { useParams, useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
 import {
   PiDotsThreeOutlineDuotone as DotsIcon,
   PiTrashDuotone as TrashIcon,
 } from 'react-icons/pi'
 import PostActionBar from '../common/post/PostActionBar'
+import usePostAction from '@/hooks/usePostAction'
+import usePost from '@/hooks/usePost'
 
 function Post() {
-  const [post, setPost] = useState<PostType>()
   const { postId } = useParams<{ postId: string }>()
   const { data: session } = useSession()
-  const router = useRouter()
-
-  const handleTrashClick = () => {
-    deletePost(postId)
-    router.replace('/')
-  }
-
-  useEffect(() => {
-    if (!postId) return
-    onSnapshot(getPostRef(postId), (snapshot) => {
-      setPost({
-        id: snapshot.id,
-        ...snapshot.data(),
-      } as PostType)
-    })
-  }, [postId])
+  const { post } = usePost(postId)
+  const { handleTrashClick } = usePostAction(postId)
 
   return (
     <Card variant='outline' border='none'>
