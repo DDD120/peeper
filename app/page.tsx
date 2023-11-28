@@ -1,6 +1,6 @@
 'use client'
 
-import CommentInputModal from '@/components/home/CommentInputModal'
+import CommentInputModal from '@/components/common/CommentInputModal'
 import Feed from '@/components/home/Feed'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'

@@ -1,3 +1,5 @@
+'use client'
+
 import { getPostRef } from '@/apis/post'
 import { createComment } from '@/apis/comment'
 import { useModalState, usePostIdState } from '@/atoms/modalAtom'

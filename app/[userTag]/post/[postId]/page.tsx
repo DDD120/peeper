@@ -1,4 +1,5 @@
 import { getPost } from '@/apis/post'
+import CommentInputModal from '@/components/common/CommentInputModal'
 import Post from '@/components/post/Post'
 import PostHeader from '@/components/post/PostHeader'
 import { PostType } from '@/types/type'
@@ -9,6 +10,7 @@ function PostPage({}) {
     <>
       <PostHeader />
       <Post />
+      <CommentInputModal />
     </>
   )
 }
