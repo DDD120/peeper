@@ -1,19 +1,10 @@
-import {
-  PiDotsThreeOutlineDuotone as DotsIcon,
-  PiTrashDuotone as TrashIcon,
-} from 'react-icons/pi'
-import { PostType } from '@/types/type'
+import { CommentType, PostType } from '@/types/type'
 import {
   Avatar,
   Card,
   CardBody,
   Flex,
   Heading,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
   Stack,
   Text,
 } from '@chakra-ui/react'
@@ -21,16 +12,15 @@ import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { formatDate } from '@/utils/date'
 import PostActionBar from '../common/post/PostActionBar'
-import usePostAction from '@/hooks/usePostAction'
+import PostMenu from '../common/post/PostMenu'
 
 interface Props {
-  post: PostType
+  post: PostType | CommentType
 }
 
 function Post({ post }: Props) {
   const { data: session } = useSession()
   const router = useRouter()
-  const { handleTrashClick } = usePostAction(post.id)
 
   return (
     <Card
@@ -77,22 +67,7 @@ function Post({ post }: Props) {
           <PostActionBar postId={post.id} />
         </Stack>
       </CardBody>
-      <Menu>
-        <MenuButton
-          as={IconButton}
-          aria-label='Options'
-          icon={<DotsIcon />}
-          variant='unstyled'
-          onClick={(e) => e.stopPropagation()}
-        />
-        <MenuList>
-          {session?.user.uid === post.userId && (
-            <MenuItem icon={<TrashIcon size={24} />} onClick={handleTrashClick}>
-              핍 삭제하기
-            </MenuItem>
-          )}
-        </MenuList>
-      </Menu>
+      <PostMenu postId={post.id} userId={post.userId} />
     </Card>
   )
 }
