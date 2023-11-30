@@ -54,7 +54,7 @@ function CommentInputModal() {
     if (!session) return
     await createComment({
       postId,
-      comment: value,
+      text: value,
       userId: session.user.uid,
       username: session.user.name,
       tag: session.user.tag,

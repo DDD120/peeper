@@ -9,7 +9,7 @@ import { db } from './firebase'
 
 interface CreateCommentProps {
   postId: string
-  comment: string
+  text: string
   userId: string | undefined
   username: string | null | undefined
   tag: string | null | undefined
@@ -18,11 +18,11 @@ interface CreateCommentProps {
 
 export async function createComment({
   postId,
-  comment,
+  text,
   ...userInfo
 }: CreateCommentProps) {
   return await addDoc(collection(db, 'posts', postId, 'comments'), {
-    comment,
+    text,
     ...userInfo,
     timestamp: serverTimestamp(),
   })
@@ -31,6 +31,6 @@ export async function createComment({
 export function getCommentsQuery(postId: string) {
   return query(
     collection(db, 'posts', postId, 'comments'),
-    orderBy('timestamp', 'desc')
+    orderBy('timestamp', 'asc')
   )
 }

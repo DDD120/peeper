@@ -17,7 +17,7 @@ export interface LikeType {
 
 export interface CommentType {
   id: string
-  comment: string
+  text: string
   userId: string
   username: string
   userImg: string
