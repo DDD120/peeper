@@ -5,7 +5,7 @@ import { Divider, Stack } from '@chakra-ui/react'
 import Post from '../home/Post'
 import { useParams } from 'next/navigation'
 
-function PostCommnets() {
+function PostComments() {
   const { postId } = useParams<{ postId: string }>()
   const { comments } = usePostAction(postId)
 
@@ -18,4 +18,4 @@ function PostCommnets() {
   )
 }
 
-export default PostCommnets
+export default PostComments
