@@ -18,12 +18,14 @@ function usePostAction(postId: string) {
   const router = useRouter()
   const { data: session } = useSession()
 
-  const handleChatClick = () => {
+  const handleChatClick = (e: MouseEvent) => {
+    e.stopPropagation()
     setIsOpen(true)
     setPostId(postId)
   }
 
-  const handleHeartClick = async () => {
+  const handleHeartClick = async (e: MouseEvent) => {
+    e.stopPropagation()
     if (!session || !session.user.uid) return
     setIsLiked(!isLiked)
     if (isLiked) {
@@ -39,7 +41,8 @@ function usePostAction(postId: string) {
     }
   }
 
-  const handleTrashClick = () => {
+  const handleTrashClick = (e: MouseEvent) => {
+    e.stopPropagation()
     deletePost(postId)
     router.replace('/')
   }
