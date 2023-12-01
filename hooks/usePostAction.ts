@@ -6,7 +6,7 @@ import { CommentType, LikeType } from '@/types/type'
 import { onSnapshot } from 'firebase/firestore'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 function usePostAction(postId: string) {
   const [comments, setComments] = useState<CommentType[]>([])
@@ -47,8 +47,8 @@ function usePostAction(postId: string) {
     router.replace('/')
   }
 
-  useEffect(() => {
-    onSnapshot(getCommentsQuery(postId), (snapshot) => {
+  const getComments = useCallback(async () => {
+    onSnapshot(await getCommentsQuery(postId), (snapshot) => {
       const comments = snapshot.docs.map((doc) => {
         const data = doc.data()
         if (data.userId === session?.user.uid) setHasMyComment(true)
@@ -60,6 +60,10 @@ function usePostAction(postId: string) {
       })
       setComments(comments)
     })
+  }, [postId, session])
+
+  useEffect(() => {
+    getComments()
     onSnapshot(getLikesByPostQuery(postId), (snapshot) => {
       const likes = snapshot.docs.map((doc) => {
         const data = doc.data()
@@ -72,7 +76,7 @@ function usePostAction(postId: string) {
       })
       setLikes(likes)
     })
-  }, [postId, session])
+  }, [postId, session, getComments])
 
   return {
     comments,

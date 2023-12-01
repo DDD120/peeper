@@ -29,7 +29,9 @@ function Post({ post }: Props) {
       w='full'
       border='none'
       cursor='pointer'
-      onClick={() => router.push(`/${session?.user.tag}/post/${post.id}`)}
+      onClick={() =>
+        router.push(`/${session?.user.tag}/post/${post.id}`, { scroll: false })
+      }
       _hover={{
         backgroundColor: 'gray.50',
       }}

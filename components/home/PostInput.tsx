@@ -29,6 +29,7 @@ function PostInput() {
     setIsLoading(true)
 
     await createPost({
+      upperPostId: null,
       userId: session.user.uid,
       username: session.user.name,
       userImg: session.user.image,

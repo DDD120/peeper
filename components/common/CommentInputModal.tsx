@@ -1,6 +1,6 @@
 'use client'
 
-import { getPostRef } from '@/apis/post'
+import { createPost, getPostRef } from '@/apis/post'
 import { createComment } from '@/apis/comment'
 import { useModalState, usePostIdState } from '@/atoms/modalAtom'
 import { PostType } from '@/types/type'
@@ -53,7 +53,7 @@ function CommentInputModal() {
   const onButtonClick = async () => {
     if (!session) return
     await createComment({
-      postId,
+      upperPostId: postId,
       text: value,
       userId: session.user.uid,
       username: session.user.name,

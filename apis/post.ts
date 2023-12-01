@@ -7,10 +7,12 @@ import {
   orderBy,
   query,
   serverTimestamp,
+  where,
 } from 'firebase/firestore'
 import { db } from './firebase'
 
 interface CreatePostProps {
+  upperPostId: string | null
   userId: string | undefined
   username: string | undefined | null
   userImg: string | undefined | null
@@ -26,7 +28,11 @@ export async function createPost(props: CreatePostProps) {
 }
 
 export function getPostsQuery() {
-  return query(collection(db, 'posts'), orderBy('timestamp', 'desc'))
+  return query(
+    collection(db, 'posts'),
+    where('upperPostId', '==', null),
+    orderBy('timestamp', 'desc')
+  )
 }
 
 export function getPostRef(postId: string) {

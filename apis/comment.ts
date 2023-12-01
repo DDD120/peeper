@@ -1,36 +1,45 @@
 import {
+  FieldPath,
   addDoc,
   collection,
+  doc,
+  documentId,
+  getDocs,
   orderBy,
   query,
   serverTimestamp,
+  setDoc,
+  where,
 } from 'firebase/firestore'
 import { db } from './firebase'
+import { createPost } from './post'
 
 interface CreateCommentProps {
-  postId: string
+  upperPostId: string
   text: string
   userId: string | undefined
-  username: string | null | undefined
-  tag: string | null | undefined
-  userImg: string | null | undefined
+  username: string | undefined | null
+  userImg: string | undefined | null
+  tag: string | undefined
 }
 
 export async function createComment({
-  postId,
-  text,
-  ...userInfo
+  upperPostId,
+  ...rest
 }: CreateCommentProps) {
-  return await addDoc(collection(db, 'posts', postId, 'comments'), {
-    text,
-    ...userInfo,
-    timestamp: serverTimestamp(),
+  const comment = await createPost({
+    upperPostId,
+    ...rest,
   })
+
+  return await setDoc(doc(db, 'posts', upperPostId, 'comments', comment.id), {})
 }
 
-export function getCommentsQuery(postId: string) {
-  return query(
-    collection(db, 'posts', postId, 'comments'),
-    orderBy('timestamp', 'asc')
-  )
+export async function getCommentsQuery(postId: string) {
+  const comments = await getDocs(collection(db, 'posts', postId, 'comments'))
+  const ids: string[] = []
+  comments.forEach((c) => ids.push(c.id))
+  if (!ids.length) return query(collection(db, 'invalid'))
+
+  return query(collection(db, 'posts'), where(documentId(), 'in', ids))
 }
