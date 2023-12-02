@@ -7,6 +7,14 @@ import { PiArrowLeftDuotone as ArrowLeftIcon } from 'react-icons/pi'
 function PostHeader() {
   const router = useRouter()
 
+  const handleBackClick = () => {
+    if (document.referrer.startsWith(process.env.NEXT_PUBLIC_HOST)) {
+      router.back()
+    } else {
+      router.push('/', { scroll: false })
+    }
+  }
+
   return (
     <Flex
       alignItems='center'
@@ -23,7 +31,7 @@ function PostHeader() {
         w={6}
         h={6}
         rounded='full'
-        onClick={() => router.push('/')}
+        onClick={handleBackClick}
       >
         <ArrowLeftIcon />
       </IconButton>
