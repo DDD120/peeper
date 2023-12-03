@@ -1,17 +1,20 @@
 import { getPost } from '@/apis/post'
 import CommentInputModal from '@/components/common/CommentInputModal'
-import Post from '@/components/post/Post'
 import PostCommnents from '@/components/post/PostCommnents'
 import PostHeader from '@/components/post/PostHeader'
+import PostMain from '@/components/post/PostMain'
 import { PostType } from '@/types/type'
+import { Box } from '@chakra-ui/react'
 import { Metadata } from 'next'
 
 function PostPage({}) {
   return (
     <>
       <PostHeader />
-      <Post />
-      <PostCommnents />
+      <Box h='6000px'>
+        <PostMain />
+        <PostCommnents />
+      </Box>
       <CommentInputModal />
     </>
   )

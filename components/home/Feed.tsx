@@ -6,8 +6,8 @@ import { PiShootingStarDuotone } from 'react-icons/pi'
 import { PostType } from '@/types/type'
 import { onSnapshot } from 'firebase/firestore'
 import PostInput from './PostInput'
-import Post from './Post'
 import { getPostsQuery } from '@/apis/post'
+import Post from '../common/post/Post'
 
 function Feed() {
   const [posts, setPosts] = useState<PostType[]>([])

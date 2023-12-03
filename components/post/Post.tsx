@@ -13,17 +13,30 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { useParams } from 'next/navigation'
-import PostActionBar from '../common/post/PostActionBar'
-import usePost from '@/hooks/usePost'
 import PostMenu from '../common/post/PostMenu'
+import PostActionBar from '../common/post/PostActionBar'
+import { PostType } from '@/types/type'
+import {
+  ForwardRefRenderFunction,
+  ForwardedRef,
+  RefObject,
+  forwardRef,
+  useRef,
+} from 'react'
 
-function Post() {
-  const { postId } = useParams<{ postId: string }>()
-  const { post } = usePost(postId)
+interface Props {
+  postId: string
+  post: PostType | undefined
+}
+
+function Post(
+  { postId, post }: Props,
+  scrollRef: ForwardedRef<HTMLDivElement>
+) {
+  const localRef = useRef<HTMLDivElement>(null)
 
   return (
-    <Card variant='outline' border='none'>
+    <Card variant='outline' border='none' ref={scrollRef ?? localRef}>
       <CardHeader>
         <Flex justifyContent='space-between'>
           <Flex gap={2}>
@@ -56,4 +69,4 @@ function Post() {
   )
 }
 
-export default Post
+export default forwardRef(Post)

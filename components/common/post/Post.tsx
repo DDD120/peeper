@@ -12,8 +12,8 @@ import {
 } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
 import { formatDate } from '@/utils/date'
-import PostActionBar from '../common/post/PostActionBar'
-import PostMenu from '../common/post/PostMenu'
+import PostActionBar from './PostActionBar'
+import PostMenu from './PostMenu'
 
 interface Props {
   post: PostType | CommentType

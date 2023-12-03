@@ -6,7 +6,7 @@ import { CommentType, LikeType } from '@/types/type'
 import { onSnapshot } from 'firebase/firestore'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useCallback, useEffect, useState } from 'react'
+import { MouseEvent, useCallback, useEffect, useState } from 'react'
 
 function usePostAction(postId: string) {
   const [comments, setComments] = useState<CommentType[]>([])
@@ -18,13 +18,13 @@ function usePostAction(postId: string) {
   const router = useRouter()
   const { data: session } = useSession()
 
-  const handleChatClick = (e: MouseEvent) => {
+  const handleChatClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
     setIsOpen(true)
     setPostId(postId)
   }
 
-  const handleHeartClick = async (e: MouseEvent) => {
+  const handleHeartClick = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
     if (!session || !session.user.uid) return
     setIsLiked(!isLiked)

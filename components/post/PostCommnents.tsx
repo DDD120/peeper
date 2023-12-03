@@ -2,8 +2,8 @@
 
 import usePostAction from '@/hooks/usePostAction'
 import { Divider, Stack } from '@chakra-ui/react'
-import Post from '../home/Post'
 import { useParams } from 'next/navigation'
+import Post from '../common/post/Post'
 
 function PostComments() {
   const { postId } = useParams<{ postId: string }>()
