@@ -1,5 +1,3 @@
-'use client'
-
 import { formatDate } from '@/utils/date'
 import {
   Avatar,
@@ -16,27 +14,15 @@ import {
 import PostMenu from '../common/post/PostMenu'
 import PostActionBar from '../common/post/PostActionBar'
 import { PostType } from '@/types/type'
-import {
-  ForwardRefRenderFunction,
-  ForwardedRef,
-  RefObject,
-  forwardRef,
-  useRef,
-} from 'react'
 
 interface Props {
   postId: string
   post: PostType | undefined
 }
 
-function Post(
-  { postId, post }: Props,
-  scrollRef: ForwardedRef<HTMLDivElement>
-) {
-  const localRef = useRef<HTMLDivElement>(null)
-
+function Post({ postId, post }: Props) {
   return (
-    <Card variant='outline' border='none' ref={scrollRef ?? localRef}>
+    <Card variant='outline' border='none'>
       <CardHeader>
         <Flex justifyContent='space-between'>
           <Flex gap={2}>
@@ -69,4 +55,4 @@ function Post(
   )
 }
 
-export default forwardRef(Post)
+export default Post

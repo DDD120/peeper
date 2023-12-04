@@ -9,10 +9,11 @@ interface Props {
 }
 
 function UpperPost({ post }: Props) {
-  const { upperPost } = useUpperPost(post.upperPostId)
+  const { upperPost, setTarget } = useUpperPost(post.upperPostId)
 
   return (
     <>
+      <div ref={setTarget}></div>
       {upperPost && <UpperPost post={upperPost} />}
       <Post post={post} />
     </>

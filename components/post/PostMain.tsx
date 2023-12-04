@@ -12,13 +12,15 @@ function PostMain() {
 
   const scrollRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }, [scrollRef])
+    scrollRef.current?.scrollIntoView({ block: 'start' })
+    scrollBy(0, -46)
+  }, [scrollRef, upperPost])
 
   return (
     <>
       {upperPost && <UpperPost post={upperPost} />}
-      {post && <Post post={post} postId={postId} ref={scrollRef} />}
+      <div ref={scrollRef}></div>
+      {post && <Post post={post} postId={postId} />}
     </>
   )
 }
