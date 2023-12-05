@@ -3,6 +3,7 @@
 import { PostType } from '@/types/type'
 import Post from '../common/post/Post'
 import useUpperPost from '@/hooks/useUpperPost'
+import DeletePost from './DeletePost'
 
 interface Props {
   post: PostType
@@ -15,7 +16,7 @@ function UpperPost({ post }: Props) {
     <>
       <div ref={setTarget}></div>
       {upperPost && <UpperPost post={upperPost} />}
-      <Post post={post} />
+      {post.deleteAt ? <DeletePost /> : <Post post={post} />}
     </>
   )
 }

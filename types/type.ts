@@ -8,23 +8,13 @@ export interface PostType {
   userImg: string
   tag: string
   text: string
-  timestamp: Timestamp
+  createAt: Timestamp
+  deleteAt: Timestamp | null
 }
 
 export interface LikeType {
   id: string
   userId: string
-}
-
-export interface CommentType {
-  upperPostId: string
-  id: string
-  text: string
-  userId: string
-  username: string
-  userImg: string
-  tag: string
-  timestamp: Timestamp
 }
 
 export interface UserType {

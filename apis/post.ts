@@ -1,12 +1,12 @@
 import {
   addDoc,
   collection,
-  deleteDoc,
   doc,
   getDoc,
   orderBy,
   query,
   serverTimestamp,
+  updateDoc,
   where,
 } from 'firebase/firestore'
 import { db } from './firebase'
@@ -23,7 +23,8 @@ interface CreatePostProps {
 export async function createPost(props: CreatePostProps) {
   return await addDoc(collection(db, 'posts'), {
     ...props,
-    timestamp: serverTimestamp(),
+    createAt: serverTimestamp(),
+    deleteAt: null,
   })
 }
 
@@ -31,7 +32,8 @@ export function getPostsQuery() {
   return query(
     collection(db, 'posts'),
     where('upperPostId', '==', null),
-    orderBy('timestamp', 'desc')
+    where('deleteAt', '==', null),
+    orderBy('createAt', 'desc')
   )
 }
 
@@ -44,5 +46,7 @@ export async function getPost(postId: string) {
 }
 
 export async function deletePost(postId: string) {
-  return await deleteDoc(doc(db, 'posts', postId))
+  return await updateDoc(doc(db, 'posts', postId), {
+    deleteAt: serverTimestamp(),
+  })
 }

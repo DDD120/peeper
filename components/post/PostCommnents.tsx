@@ -4,6 +4,7 @@ import usePostAction from '@/hooks/usePostAction'
 import { Divider, Stack } from '@chakra-ui/react'
 import { useParams } from 'next/navigation'
 import Post from '../common/post/Post'
+import DeletePost from './DeletePost'
 
 function PostComments() {
   const { postId } = useParams<{ postId: string }>()
@@ -11,9 +12,13 @@ function PostComments() {
 
   return (
     <Stack divider={<Divider />} my={4}>
-      {comments.map((commnet) => (
-        <Post key={commnet.id} post={commnet} />
-      ))}
+      {comments.map((comment) =>
+        comment.deleteAt ? (
+          <DeletePost key={comment.id} />
+        ) : (
+          <Post key={comment.id} post={comment} />
+        )
+      )}
     </Stack>
   )
 }

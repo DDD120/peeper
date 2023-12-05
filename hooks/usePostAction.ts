@@ -2,14 +2,14 @@ import { getCommentsQuery } from '@/apis/comment'
 import { getLikesByPostQuery, likePost, unlikePost } from '@/apis/like'
 import { deletePost } from '@/apis/post'
 import { useSetModalState, useSetPostIdState } from '@/atoms/modalAtom'
-import { CommentType, LikeType } from '@/types/type'
+import { LikeType, PostType } from '@/types/type'
 import { onSnapshot } from 'firebase/firestore'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { MouseEvent, useCallback, useEffect, useState } from 'react'
 
 function usePostAction(postId: string) {
-  const [comments, setComments] = useState<CommentType[]>([])
+  const [comments, setComments] = useState<PostType[]>([])
   const [likes, setLikes] = useState<LikeType[]>([])
   const [isLiked, setIsLiked] = useState(false)
   const [hasMyComment, setHasMyComment] = useState(false)
@@ -56,7 +56,7 @@ function usePostAction(postId: string) {
         return {
           id: doc.id,
           ...data,
-        } as CommentType
+        } as PostType
       })
       setComments(comments)
     })
