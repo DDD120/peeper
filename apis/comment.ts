@@ -1,13 +1,10 @@
 import {
-  FieldPath,
-  addDoc,
   collection,
   doc,
   documentId,
+  getCountFromServer,
   getDocs,
-  orderBy,
   query,
-  serverTimestamp,
   setDoc,
   where,
 } from 'firebase/firestore'
@@ -42,4 +39,8 @@ export async function getCommentsQuery(postId: string) {
   if (!ids.length) return query(collection(db, 'invalid'))
 
   return query(collection(db, 'posts'), where(documentId(), 'in', ids))
+}
+
+export async function getCommentsCount(postId: string) {
+  return await getCountFromServer(collection(db, 'posts'))
 }

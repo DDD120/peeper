@@ -1,5 +1,5 @@
 import NextLink from 'next/link'
-import { CommentType, PostType } from '@/types/type'
+import { PostType } from '@/types/type'
 import {
   Avatar,
   Card,
@@ -16,7 +16,7 @@ import PostActionBar from './PostActionBar'
 import PostMenu from './PostMenu'
 
 interface Props {
-  post: PostType | CommentType
+  post: PostType
 }
 
 function Post({ post }: Props) {
@@ -61,9 +61,9 @@ function Post({ post }: Props) {
                 color='blackAlpha.700'
               >
                 ·{' '}
-                {post.timestamp &&
+                {post.createAt &&
                   formatDate({
-                    date: post.timestamp.toDate(),
+                    date: post.createAt.toDate(),
                     type: 'distanceToNow',
                   })}
               </Text>

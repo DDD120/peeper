@@ -14,7 +14,7 @@ function PostComments() {
     <Stack divider={<Divider />} my={4}>
       {comments.map((comment) =>
         comment.deleteAt ? (
-          <DeletePost key={comment.id} />
+          <DeletePost key={comment.id} postId={comment.id} />
         ) : (
           <Post key={comment.id} post={comment} />
         )
