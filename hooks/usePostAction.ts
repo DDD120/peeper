@@ -8,7 +8,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { MouseEvent, useCallback, useEffect, useState } from 'react'
 
-function usePostAction(postId: string) {
+function usePostAction(postId: string | undefined) {
   const [comments, setComments] = useState<PostType[]>([])
   const [likes, setLikes] = useState<LikeType[]>([])
   const [isLiked, setIsLiked] = useState(false)
@@ -20,13 +20,14 @@ function usePostAction(postId: string) {
 
   const handleChatClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
+    if (!postId) return
     setIsOpen(true)
     setPostId(postId)
   }
 
   const handleHeartClick = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
-    if (!session || !session.user.uid) return
+    if (!session || !session.user.uid || !postId) return
     setIsLiked(!isLiked)
     if (isLiked) {
       await unlikePost({
@@ -43,11 +44,13 @@ function usePostAction(postId: string) {
 
   const handleTrashClick = (e: MouseEvent) => {
     e.stopPropagation()
+    if (!postId) return
     deletePost(postId)
     router.replace('/')
   }
 
   const getComments = useCallback(async () => {
+    if (!postId) return
     onSnapshot(await getCommentsQuery(postId), (snapshot) => {
       const comments = snapshot.docs.map((doc) => {
         const data = doc.data()
@@ -63,6 +66,7 @@ function usePostAction(postId: string) {
   }, [postId, session])
 
   useEffect(() => {
+    if (!postId) return
     getComments()
     onSnapshot(getLikesByPostQuery(postId), (snapshot) => {
       const likes = snapshot.docs.map((doc) => {
