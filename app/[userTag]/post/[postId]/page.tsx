@@ -1,5 +1,6 @@
 import { getPost } from '@/apis/post'
 import CommentInputModal from '@/components/common/CommentInputModal'
+import CommentInput from '@/components/post/CommentInput'
 import PostCommnents from '@/components/post/PostCommnents'
 import PostHeader from '@/components/post/PostHeader'
 import PostMain from '@/components/post/PostMain'
@@ -13,6 +14,7 @@ function PostPage({}) {
       <PostHeader />
       <Box h='6000px'>
         <PostMain />
+        <CommentInput />
         <PostCommnents />
       </Box>
       <CommentInputModal />

@@ -22,7 +22,7 @@ interface Props {
 
 function Post({ postId, post }: Props) {
   return (
-    <Card variant='outline' border='none'>
+    <Card variant='outline' borderBottomRadius={0} borderBottom='none'>
       <CardHeader>
         <Flex justifyContent='space-between'>
           <Flex gap={2}>

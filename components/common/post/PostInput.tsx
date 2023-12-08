@@ -17,8 +17,13 @@ import EmojiPicker, {
 } from 'emoji-picker-react'
 import { useSession } from 'next-auth/react'
 import { createPost } from '@/apis/post'
+import { createComment } from '@/apis/comment'
 
-function PostInput() {
+interface Props {
+  upperPostId?: string | null
+}
+
+function PostInput({ upperPostId = null }: Props) {
   const [value, setValue] = useState('')
   const [isShowEmojis, setIsShowEmojis] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -28,14 +33,26 @@ function PostInput() {
     if (!session || isLoading) return
     setIsLoading(true)
 
-    await createPost({
-      upperPostId: null,
+    const data = {
+      text: value,
       userId: session.user.uid,
       username: session.user.name,
-      userImg: session.user.image,
       tag: session.user.tag,
-      text: value,
-    })
+      userImg: session.user.image,
+    }
+
+    if (upperPostId) {
+      await createComment({
+        upperPostId,
+        ...data,
+      })
+    } else {
+      await createPost({
+        upperPostId: null,
+        ...data,
+      })
+    }
+
     setIsLoading(false)
     setIsShowEmojis(false)
     setValue('')

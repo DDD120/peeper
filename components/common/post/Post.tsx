@@ -26,7 +26,7 @@ function Post({ post }: Props) {
 
   return (
     <Card
-      as="article"
+      as='article'
       direction='row'
       variant='outline'
       w='full'
