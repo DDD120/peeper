@@ -42,7 +42,7 @@ function Feed() {
           <Icon w={6} h={6} as={PiShootingStarDuotone} />
         </Flex>
       </Flex>
-      <PostInput />
+      <PostInput placeholder='무슨 일이 일어나고 있나요?' />
       <Divider my={4} />
       <Stack divider={<Divider />} my={4}>
         {posts.map((post) => (

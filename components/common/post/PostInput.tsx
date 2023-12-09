@@ -20,10 +20,11 @@ import { createPost } from '@/apis/post'
 import { createComment } from '@/apis/comment'
 
 interface Props {
+  placeholder: string
   upperPostId?: string | null
 }
 
-function PostInput({ upperPostId = null }: Props) {
+function PostInput({ placeholder, upperPostId = null }: Props) {
   const [value, setValue] = useState('')
   const [isShowEmojis, setIsShowEmojis] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -73,7 +74,7 @@ function PostInput({ upperPostId = null }: Props) {
       />
       <Box w='full'>
         <Textarea
-          placeholder='무슨 일이 일어나고 있나요?'
+          placeholder={placeholder}
           variant='unstyled'
           value={value}
           onChange={(e) => setValue(e.target.value)}

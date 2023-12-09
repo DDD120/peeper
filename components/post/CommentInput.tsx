@@ -17,7 +17,10 @@ function CommentInput() {
         borderBottomRadius={4}
         p={2}
       >
-        <PostInput upperPostId={postId} />
+        <PostInput
+          placeholder={`@${postId}님에게 답글 달기`}
+          upperPostId={postId}
+        />
       </Box>
     )
   }
