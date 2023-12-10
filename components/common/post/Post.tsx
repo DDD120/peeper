@@ -15,6 +15,7 @@ import { formatDate } from '@/utils/date'
 import PostActionBar from './PostActionBar'
 import PostMenu from './PostMenu'
 import { useRouter } from 'next/navigation'
+import CustomTooltip from '../CustomTooltip'
 
 interface Props {
   post: PostType
@@ -23,6 +24,7 @@ interface Props {
 function Post({ post }: Props) {
   const { data: session } = useSession()
   const router = useRouter()
+  const date = post.createAt.toDate()
 
   return (
     <Card
@@ -54,19 +56,31 @@ function Post({ post }: Props) {
             >
               @{post.tag}
             </Text>
-            <Text
-              fontSize='xs'
-              as='span'
-              lineHeight={1.5}
-              color='blackAlpha.700'
-            >
+            <Text fontSize='xs' as='span' lineHeight={1.5}>
               ·{' '}
-              {post.createAt &&
-                formatDate({
-                  date: post.createAt.toDate(),
-                  type: 'distanceToNow',
-                })}
             </Text>
+            <CustomTooltip
+              label={formatDate({
+                date,
+              })}
+            >
+              <Text
+                fontSize='xs'
+                as='span'
+                lineHeight={1.5}
+                color='blackAlpha.700'
+                _hover={{
+                  textDecoration: 'underline',
+                  textUnderlineOffset: '4px',
+                }}
+              >
+                {post.createAt &&
+                  formatDate({
+                    date,
+                    type: 'distanceToNow',
+                  })}
+              </Text>
+            </CustomTooltip>
           </Flex>
           <Text>{post.text}</Text>
           <PostActionBar postId={post.id} />

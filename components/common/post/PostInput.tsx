@@ -18,6 +18,7 @@ import EmojiPicker, {
 import { useSession } from 'next-auth/react'
 import { createPost } from '@/apis/post'
 import { createComment } from '@/apis/comment'
+import CustomTooltip from '../CustomTooltip'
 
 interface Props {
   placeholder: string
@@ -80,13 +81,15 @@ function PostInput({ placeholder, upperPostId = null }: Props) {
           onChange={(e) => setValue(e.target.value)}
         />
         <Flex justifyContent='space-between' mt={2}>
-          <IconButton
-            size='xs'
-            aria-label='select emoji'
-            icon={<PiSmileyDuotone size='100%' />}
-            variant='unstyled'
-            onClick={() => setIsShowEmojis(!isShowEmojis)}
-          />
+          <CustomTooltip label='이모티콘'>
+            <IconButton
+              size='xs'
+              aria-label='select emoji'
+              icon={<PiSmileyDuotone size='100%' />}
+              variant='unstyled'
+              onClick={() => setIsShowEmojis(!isShowEmojis)}
+            />
+          </CustomTooltip>
           {isShowEmojis && (
             <Box position='absolute' mt='32px' ml='-64px' zIndex={9}>
               <EmojiPicker

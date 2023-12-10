@@ -11,6 +11,7 @@ import {
   PiDotsThreeOutlineDuotone as DotsIcon,
   PiTrashDuotone as TrashIcon,
 } from 'react-icons/pi'
+import CustomTooltip from '../CustomTooltip'
 
 interface Props {
   postId: string
@@ -23,13 +24,15 @@ function PostMenu({ postId, userId }: Props) {
 
   return (
     <Menu>
-      <MenuButton
-        as={IconButton}
-        aria-label='Options'
-        icon={<DotsIcon />}
-        variant='unstyled'
-        onClick={(e) => e.stopPropagation()}
-      />
+      <CustomTooltip label='더보기'>
+        <MenuButton
+          as={IconButton}
+          aria-label='Options'
+          icon={<DotsIcon />}
+          variant='unstyled'
+          onClick={(e) => e.stopPropagation()}
+        />
+      </CustomTooltip>
       <MenuList>
         {session?.user.uid === userId && (
           <MenuItem icon={<TrashIcon size={24} />} onClick={handleTrashClick}>
