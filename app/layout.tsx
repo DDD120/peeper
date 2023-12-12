@@ -28,7 +28,7 @@ export default async function RootLayout({
             fontFamily='nanum'
             backgroundColor='white'
           >
-            <BasicLayout>{children}</BasicLayout>
+            {children}
           </Container>
         </Providers>
       </body>
