@@ -18,6 +18,7 @@ function PostHeader() {
 
   return (
     <Flex
+      as='header'
       alignItems='center'
       gap={2}
       py={4}
