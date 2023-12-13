@@ -30,14 +30,14 @@ function Sidebar() {
         <Box w='full'>
           <HomeLogo />
           <List spacing={2} my={4}>
-            <SidebarLink text='홈' Icon={HomeIcon} active />
-            <SidebarLink text='탐색하기' Icon={ExploreIcon} />
-            <SidebarLink text='알림' Icon={NotificationsIcon} />
-            <SidebarLink text='메시지' Icon={MessagesIcon} />
-            <SidebarLink text='북마크' Icon={BookmarksIcon} />
-            <SidebarLink text='리스트' Icon={ListsIcon} />
-            <SidebarLink text='프로필' Icon={ProfileIcon} />
-            <SidebarLink text='더보기' Icon={MoreIcon} />
+            <SidebarLink to='/' text='홈' Icon={HomeIcon} active />
+            <SidebarLink to='/' text='탐색하기' Icon={ExploreIcon} />
+            <SidebarLink to='/' text='알림' Icon={NotificationsIcon} />
+            <SidebarLink to='/' text='메시지' Icon={MessagesIcon} />
+            <SidebarLink to='/' text='북마크' Icon={BookmarksIcon} />
+            <SidebarLink to='/' text='리스트' Icon={ListsIcon} />
+            <SidebarLink to='/' text='프로필' Icon={ProfileIcon} />
+            <SidebarLink to='/' text='더보기' Icon={MoreIcon} />
           </List>
           <Show above='lg'>
             <Button
