@@ -12,6 +12,7 @@ import {
 } from 'react-icons/pi'
 import Profile from './Profile'
 import HomeLogo from './HomeLogo'
+import WritePost from './WritePost'
 
 function Sidebar() {
   return (
@@ -39,18 +40,7 @@ function Sidebar() {
             <SidebarLink to='/' text='프로필' Icon={ProfileIcon} />
             <SidebarLink to='/' text='더보기' Icon={MoreIcon} />
           </List>
-          <Show above='lg'>
-            <Button
-              w='full'
-              h='52px'
-              flexShrink={0}
-              rounded='full'
-              backgroundColor='blackAlpha.200'
-              fontSize='lg'
-            >
-              Peep
-            </Button>
-          </Show>
+          <WritePost />
         </Box>
         <Profile />
       </Flex>

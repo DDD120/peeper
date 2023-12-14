@@ -1,4 +1,3 @@
-import NextLink from 'next/link'
 import { PostType } from '@/types/type'
 import {
   Avatar,
@@ -6,7 +5,6 @@ import {
   CardBody,
   Flex,
   Heading,
-  Link,
   Stack,
   Text,
 } from '@chakra-ui/react'
@@ -24,7 +22,7 @@ interface Props {
 function Post({ post }: Props) {
   const { data: session } = useSession()
   const router = useRouter()
-  const date = post.createAt.toDate()
+  const date = post.createAt?.toDate()
 
   return (
     <Card

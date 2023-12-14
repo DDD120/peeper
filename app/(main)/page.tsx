@@ -17,7 +17,7 @@ function HomePage() {
   return (
     <>
       <Feed />
-      <CommentInputModal />
+      {/* <CommentInputModal /> */}
     </>
   )
 }

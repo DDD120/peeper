@@ -12,6 +12,15 @@ export interface PostType {
   deleteAt: Timestamp | null
 }
 
+export interface CreatePostProps {
+  upperPostId: string | null
+  userId: string | undefined
+  username: string | undefined | null
+  userImg: string | undefined | null
+  tag: string | undefined
+  text: string
+}
+
 export interface LikeType {
   id: string
   userId: string
