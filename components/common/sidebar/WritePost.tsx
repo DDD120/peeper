@@ -1,14 +1,17 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import BasicInputModal from '../inputModal/BasicInputModal'
 import { Button, Show } from '@chakra-ui/react'
-import { useSetModalState } from '@/atoms/modalAtom'
 import { createPost } from '@/apis/post'
 import { CreatePostProps } from '@/types/type'
 
 function WritePost() {
-  const setIsOpen = useSetModalState()
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleModalClose = () => {
+    setIsOpen(false)
+  }
 
   const onButtonClick = () => {
     setIsOpen(true)
@@ -37,9 +40,11 @@ function WritePost() {
         Peep
       </Button>
       <BasicInputModal
+        isOpen={isOpen}
         heading='Peep'
         placeholder='무슨 일이 일어나고 있나요?'
         handleButtonClick={onModalButtonClick}
+        handleModalClose={handleModalClose}
       />
     </Show>
   )

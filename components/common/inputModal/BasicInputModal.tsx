@@ -25,22 +25,25 @@ import { useState } from 'react'
 import { PiSmileyDuotone as SmileyIcon } from 'react-icons/pi'
 
 interface Props {
+  isOpen: boolean
   children?: React.ReactNode
   heading: string
   placeholder: string
   handleButtonClick: (data: Omit<CreatePostProps, 'upperPostId'>) => void
+  handleModalClose: () => void
 }
 
 function BasicInputModal({
+  isOpen,
   children,
   heading,
   placeholder,
+  handleModalClose,
   handleButtonClick,
 }: Props) {
   const [isLoading, setIsLoading] = useState(false)
   const [isShowEmojis, setIsShowEmojis] = useState(false)
   const [value, setValue] = useState('')
-  const [isOpen, setIsOpen] = useModalState()
   const { data: session } = useSession()
 
   const onEmojiClick = (emojiData: EmojiClickData) => {
@@ -48,8 +51,8 @@ function BasicInputModal({
   }
 
   const onModalClose = () => {
+    handleModalClose()
     setValue('')
-    setIsOpen(false)
   }
 
   const onButtonClick = () => {
@@ -73,7 +76,7 @@ function BasicInputModal({
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{heading}</ModalHeader>
-        <ModalCloseButton onClick={() => setIsOpen(false)} />
+        <ModalCloseButton onClick={onModalClose} />
         <ModalBody>
           {children}
           <Flex gap={4}>

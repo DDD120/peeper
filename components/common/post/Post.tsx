@@ -58,9 +58,12 @@ function Post({ post }: Props) {
               ·{' '}
             </Text>
             <CustomTooltip
-              label={formatDate({
-                date,
-              })}
+              label={
+                post.createAt &&
+                formatDate({
+                  date,
+                })
+              }
             >
               <Text
                 fontSize='xs'
