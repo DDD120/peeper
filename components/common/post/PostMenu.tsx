@@ -11,7 +11,7 @@ import {
   PiDotsThreeOutlineDuotone as DotsIcon,
   PiTrashDuotone as TrashIcon,
 } from 'react-icons/pi'
-import Tooltip from '../CustomTooltip'
+import Tooltip from '../Tooltip'
 
 interface Props {
   postId: string

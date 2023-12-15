@@ -13,7 +13,7 @@ import { formatDate } from '@/utils/date'
 import PostActionBar from './PostActionBar'
 import PostMenu from './PostMenu'
 import { useRouter } from 'next/navigation'
-import Tooltip from '../CustomTooltip'
+import Tooltip from '../Tooltip'
 
 interface Props {
   post: PostType

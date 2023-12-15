@@ -6,7 +6,7 @@ import {
   PiHeart as LineHeartIcon,
   PiHeartDuotone as FillHeartIcon,
 } from 'react-icons/pi'
-import Tooltip from '../CustomTooltip'
+import Tooltip from '../Tooltip'
 
 interface Props {
   postId: string

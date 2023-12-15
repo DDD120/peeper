@@ -18,7 +18,7 @@ import EmojiPicker, {
 import { useSession } from 'next-auth/react'
 import { createPost } from '@/apis/post'
 import { createComment } from '@/apis/comment'
-import Tooltip from '../CustomTooltip'
+import Tooltip from '../Tooltip'
 
 interface Props {
   placeholder: string
