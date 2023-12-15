@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import BasicInputModal from '../inputModal/BasicInputModal'
 import { Button, Show } from '@chakra-ui/react'
 import { createPost } from '@/apis/post'
-import { CreatePostProps } from '@/types/type'
+import { CreatePostPropsType } from '@/types/type'
 
 function WritePost() {
   const [isOpen, setIsOpen] = useState(false)
@@ -18,7 +18,7 @@ function WritePost() {
   }
 
   const onModalButtonClick = async (
-    data: Omit<CreatePostProps, 'upperPostId'>
+    data: Omit<CreatePostPropsType, 'upperPostId'>
   ) => {
     await createPost({
       upperPostId: null,

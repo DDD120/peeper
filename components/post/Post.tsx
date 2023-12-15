@@ -21,6 +21,8 @@ interface Props {
 }
 
 function Post({ postId, post }: Props) {
+  const date = post?.createAt.toDate()
+
   return (
     <Card variant='outline' borderBottomRadius={0} borderBottom='none'>
       <CardHeader>
@@ -43,9 +45,9 @@ function Post({ postId, post }: Props) {
       <CardFooter>
         <Stack>
           <Text fontSize='sm'>
-            {post?.timestamp &&
+            {date &&
               formatDate({
-                date: post.timestamp.toDate(),
+                date,
               })}
           </Text>
           <PostActionBar postId={postId} />

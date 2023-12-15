@@ -1,4 +1,3 @@
-import { useModalState } from '@/atoms/modalAtom'
 import { CreatePostProps } from '@/types/type'
 import {
   Box,
@@ -66,6 +65,7 @@ function BasicInputModal({
       userImg: session.user.image,
     }
     handleButtonClick(data)
+    handleModalClose()
     setIsLoading(false)
     setIsShowEmojis(false)
     setValue('')

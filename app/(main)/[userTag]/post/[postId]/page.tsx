@@ -1,5 +1,5 @@
 import { getPost } from '@/apis/post'
-import CommentInputModal from '@/components/common/CommentInputModal'
+import CommentInputModal from '@/components/common/inputModal/CommentInputModal'
 import CommentInput from '@/components/post/CommentInput'
 import PostCommnents from '@/components/post/PostCommnents'
 import PostHeader from '@/components/post/PostHeader'

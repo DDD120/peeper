@@ -59,7 +59,7 @@ function Post({ post }: Props) {
             </Text>
             <CustomTooltip
               label={
-                post.createAt &&
+                date &&
                 formatDate({
                   date,
                 })
@@ -75,7 +75,7 @@ function Post({ post }: Props) {
                   textUnderlineOffset: '4px',
                 }}
               >
-                {post.createAt &&
+                {date &&
                   formatDate({
                     date,
                     type: 'distanceToNow',

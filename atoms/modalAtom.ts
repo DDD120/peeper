@@ -1,12 +1,13 @@
 import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-export const modalState = atom({
+export const commentModalState = atom({
   key: 'modalState',
   default: false,
 })
 
-export const useModalState = () => useRecoilState(modalState)
-export const useSetModalState = () => useSetRecoilState(modalState)
+export const useCommentModalState = () => useRecoilState(commentModalState)
+export const useSetCommentModalState = () =>
+  useSetRecoilState(commentModalState)
 
 export const postIdState = atom({
   key: 'postIdState',

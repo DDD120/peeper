@@ -1,6 +1,6 @@
 'use client'
 
-import CommentInputModal from '@/components/common/CommentInputModal'
+import CommentInputModal from '@/components/common/inputModal/CommentInputModal'
 import Feed from '@/components/home/Feed'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
@@ -17,7 +17,7 @@ function HomePage() {
   return (
     <>
       <Feed />
-      {/* <CommentInputModal /> */}
+      <CommentInputModal />
     </>
   )
 }

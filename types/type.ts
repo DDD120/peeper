@@ -12,7 +12,7 @@ export interface PostType {
   deleteAt: Timestamp | null
 }
 
-export interface CreatePostProps {
+export interface CreatePostPropsType {
   upperPostId: string | null
   userId: string | undefined
   username: string | undefined | null
