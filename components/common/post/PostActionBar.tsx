@@ -6,7 +6,7 @@ import {
   PiHeart as LineHeartIcon,
   PiHeartDuotone as FillHeartIcon,
 } from 'react-icons/pi'
-import CustomTooltip from '../CustomTooltip'
+import Tooltip from '../CustomTooltip'
 
 interface Props {
   postId: string
@@ -25,7 +25,7 @@ function PostActionBar({ postId }: Props) {
   return (
     <Flex mt={4} gap={4}>
       <Box>
-        <CustomTooltip label='답글'>
+        <Tooltip label='답글'>
           <IconButton
             aria-label='chat button'
             variant='ghost'
@@ -39,11 +39,11 @@ function PostActionBar({ postId }: Props) {
               )
             }
           />
-        </CustomTooltip>
+        </Tooltip>
         {comments.length > 0 && <Text as='span'>{comments.length}</Text>}
       </Box>
       <Box>
-        <CustomTooltip label='마음'>
+        <Tooltip label='마음'>
           <IconButton
             aria-label='line heart button'
             variant='ghost'
@@ -57,7 +57,7 @@ function PostActionBar({ postId }: Props) {
               )
             }
           />
-        </CustomTooltip>
+        </Tooltip>
         {likes.length > 0 && <Text as='span'>{likes.length}</Text>}
       </Box>
     </Flex>

@@ -1,16 +1,16 @@
-import { Tooltip } from '@chakra-ui/react'
+import { Tooltip as CTooltip } from '@chakra-ui/react'
 
 interface Props {
   label: string
   children: React.ReactNode
 }
 
-function CustomTooltip({ label, children }: Props) {
+function Tooltip({ label, children }: Props) {
   return (
-    <Tooltip label={label} openDelay={500}>
+    <CTooltip label={label} openDelay={500}>
       {children}
-    </Tooltip>
+    </CTooltip>
   )
 }
 
-export default CustomTooltip
+export default Tooltip

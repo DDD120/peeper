@@ -13,7 +13,7 @@ import { formatDate } from '@/utils/date'
 import PostActionBar from './PostActionBar'
 import PostMenu from './PostMenu'
 import { useRouter } from 'next/navigation'
-import CustomTooltip from '../CustomTooltip'
+import Tooltip from '../CustomTooltip'
 
 interface Props {
   post: PostType
@@ -57,7 +57,7 @@ function Post({ post }: Props) {
             <Text fontSize='xs' as='span' lineHeight={1.5}>
               ·{' '}
             </Text>
-            <CustomTooltip
+            <Tooltip
               label={
                 date &&
                 formatDate({
@@ -81,7 +81,7 @@ function Post({ post }: Props) {
                     type: 'distanceToNow',
                   })}
               </Text>
-            </CustomTooltip>
+            </Tooltip>
           </Flex>
           <Text>{post.text}</Text>
           <PostActionBar postId={post.id} />

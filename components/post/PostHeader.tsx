@@ -1,9 +1,9 @@
 'use client'
 
-import { Flex, Heading, IconButton, Tooltip } from '@chakra-ui/react'
+import { Flex, Heading, IconButton } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 import { PiArrowLeftDuotone as ArrowLeftIcon } from 'react-icons/pi'
-import CustomTooltip from '../common/CustomTooltip'
+import Tooltip from '../common/CustomTooltip'
 
 function PostHeader() {
   const router = useRouter()
@@ -27,7 +27,7 @@ function PostHeader() {
       zIndex={9}
       backgroundColor='#fff'
     >
-      <CustomTooltip label='돌아가기'>
+      <Tooltip label='돌아가기'>
         <IconButton
           aria-label='back button'
           variant='ghost'
@@ -38,7 +38,7 @@ function PostHeader() {
         >
           <ArrowLeftIcon />
         </IconButton>
-      </CustomTooltip>
+      </Tooltip>
       <Heading as='h2' size={{ sm: 'sm', lg: 'md' }}>
         Peep
       </Heading>
