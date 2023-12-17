@@ -4,12 +4,12 @@ import { IconType } from 'react-icons/lib/esm/iconBase'
 
 interface Props {
   to: string
-  text: string
+  label: string
   Icon: IconType
   active?: boolean
 }
 
-function SidebarLink({ to, text, Icon, active }: Props) {
+function SidebarLink({ to, label, Icon, active }: Props) {
   return (
     <ListItem>
       <Link as={NextLink} href={to} scroll={false}>
@@ -34,7 +34,7 @@ function SidebarLink({ to, text, Icon, active }: Props) {
           <ListIcon w={8} h={8} mr={0}>
             <Icon size='100%' />
           </ListIcon>
-          <Show above='lg'>{text}</Show>
+          <Show above='lg'>{label}</Show>
         </Flex>
       </Link>
     </ListItem>
