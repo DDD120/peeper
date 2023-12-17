@@ -4,7 +4,6 @@ import Providers from '@/provider/provider'
 import { Container } from '@chakra-ui/react'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from './api/auth/[...nextauth]/route'
-import BasicLayout from '@/components/layout/BasicLayout'
 
 export const metadata: Metadata = {
   title: 'Peeper',
