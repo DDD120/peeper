@@ -1,20 +1,17 @@
 import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore'
 import { db } from './firebase'
-
-interface RegisterProps {
-  userId: string
-  username: string
-  userImg: string | null | undefined
-  tag: string
-  provider: string | undefined
-  email: string | null | undefined
-}
+import { RegisterProps } from '@/types/type'
 
 export async function register({ userId, ...rest }: RegisterProps) {
   return await setDoc(doc(db, 'users', userId), {
     userId,
     ...rest,
-    timestamp: serverTimestamp(),
+    backgroundImage: '',
+    introduction: '',
+    followingCount: 0,
+    followerCount: 0,
+    createAt: serverTimestamp(),
+    deleteAt: null,
   })
 }
 

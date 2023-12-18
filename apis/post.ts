@@ -10,9 +10,9 @@ import {
   where,
 } from 'firebase/firestore'
 import { db } from './firebase'
-import { CreatePostProps } from '@/types/type'
+import { CreatePostPropsType } from '@/types/type'
 
-export async function createPost(props: CreatePostProps) {
+export async function createPost(props: CreatePostPropsType) {
   return await addDoc(collection(db, 'posts'), {
     ...props,
     createAt: serverTimestamp(),
