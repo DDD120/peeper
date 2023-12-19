@@ -61,6 +61,7 @@ function Post({ post }: Props) {
               label={
                 date &&
                 formatDate({
+                  type: 'time-date',
                   date,
                 })
               }

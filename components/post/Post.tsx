@@ -47,6 +47,7 @@ function Post({ postId, post }: Props) {
           <Text fontSize='sm'>
             {date &&
               formatDate({
+                type: 'time-date',
                 date,
               })}
           </Text>

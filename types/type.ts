@@ -35,11 +35,26 @@ export interface UserType {
   email: string | null | undefined
 }
 
-export interface RegisterProps {
+export interface RegisterPropsType {
   userId: string
   username: string
   userImg: string | null | undefined
   tag: string
   provider: string | undefined
   email: string | null | undefined
+}
+
+export interface ProfileType {
+  userId: string
+  backgroundImage: string
+  createAt: Timestamp
+  deleteAt: Timestamp | null
+  email: string
+  followerCount: number
+  followingCount: number
+  introduction: string
+  provider: string
+  tag: string
+  userImg: string
+  username: string
 }

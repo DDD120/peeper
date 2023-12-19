@@ -1,10 +1,23 @@
-import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore'
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  where,
+} from 'firebase/firestore'
 import { db } from './firebase'
-import { RegisterProps } from '@/types/type'
+import { RegisterPropsType } from '@/types/type'
 
-export async function register({ userId, ...rest }: RegisterProps) {
+export async function register({ userId, tag, ...rest }: RegisterPropsType) {
+  setDoc(doc(db, 'user-tag', tag), {
+    userId,
+  })
   return await setDoc(doc(db, 'users', userId), {
     userId,
+    tag,
     ...rest,
     backgroundImage: '',
     introduction: '',
@@ -13,6 +26,10 @@ export async function register({ userId, ...rest }: RegisterProps) {
     createAt: serverTimestamp(),
     deleteAt: null,
   })
+}
+
+export async function getUserId(userTag: string) {
+  return await getDoc(doc(db, 'user-tag', userTag))
 }
 
 export async function getUser(userId: string) {
